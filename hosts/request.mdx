@@ -1,0 +1,29 @@
+---
+title: "Host Request"
+sidebarTitle: "Host Request"
+---
+A host request represents a formalized record or entry for a specific request or task related to a host. Host requests are typically managed and displayed in a dedicated section or page called the "Host Request" page. This page serves as an overview or dashboard where all host-related requests are listed and can be viewed. It provides users with a centralized location to monitor the status and progress of their host-related actions or operations.
+
+## Access the Host Requests:
+
+1. Go to the homepage by clicking [here](https://superreseller-qa.nominus.host/).
+2. Locate the **"Portfolio"** option.
+3. Click on the **"Hosts"** button to proceed.
+
+To retrieve data for the **"Hosts"** portfolio you can follow these steps:
+
+1. Select the **"Create_Host"** command including fields such as **"Host_Name," "Host_IP,"** and **"Host_Status_Id"**. Here's an example:
+
+| Host_Name | Host_IP     | Host_Status_Id |
+| --------- | ----------- | -------------- |
+| Host 1    | 192.168.0.1 | 1              |
+| Host 2    | 192.168.0.2 | 2              |
+| Host 3    | 192.168.0.3 | 1              |
+
+2. Retrieve the data from the **"Create_Host"** and link it to the **"Host_Status"** using the **"Host_Status_Id"** field.
+
+| Host_Name | Host_IP     | Host_Status_Id | Status_Name |
+| --------- | ----------- | -------------- | ----------- |
+| Host 1    | 192.168.0.1 | 1              | In Process  |
+| Host 2    | 192.168.0.2 | 2              | Active      |
+| Host 3    | 192.168.0.3 | 1              | In Process  |

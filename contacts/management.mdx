@@ -1,0 +1,153 @@
+---
+title: "Contact Management"
+sidebarTitle: "Contact Management"
+---
+
+**"Contact management"** plays a vital role in the **"Super Reseller"** platform, as it enables resellers to efficiently maintain accurate and up-to-date contact information for all parties involved . **"Super Reseller"** prioritizes monitoring of contacts related to domains, promptly addressing any issues, ensuring the smooth operation and accessibility of its functionality. This includes effective contact management to accurately track and update contact information, comply with domain registration regulations, and facilitate seamless communication for domain-related matters. By emphasizing these aspects, **"Super Reseller"** strives to provide resellers with a reliable centralized platform that ensures their domains are secure, contact issues are resolved promptly, and the website functions optimally for a seamless user experience.
+
+To access the **"Contacts"** option on the **"Super Reseller dashboard"**, follow the steps outlined below:
+
+1. Go to the homepage by clicking [here](https://superreseller-qa.nominus.host/).
+2. Locate the "Portfolio" option.
+3. Click on the ["Contacts" ](https://superreseller-qa.nominus.host/portfolio/contacts/)button to proceed.
+
+# Contact Handle
+
+A contact handle, also known as a handle ID, is a unique identifier assigned to a contact within the contact management system of **"Super Reseller dashboard"**. It serves as a reference or key that helps identify and distinguish individual contacts or organizations.  Contact handles are crucial for maintaining contact information, ensuring uniqueness across different contacts, and facilitating efficient retrieval and management of contact records within a system.
+
+Contact handles are typically generated according to specific logic or rules, such as incorporating the first characters of a contact's name or company name, along with a unique numeric value. Below is a generic table illustrating the logic use by **"Super Reseller"** for generating the **"Handle Id"** when creating a new contact:
+
+| Is Organization | First Name | Last Name | Company | Handle Id |
+| :-------------- | :--------- | :-------- | :------ | :-------- |
+| No              | Chris      | Matthew   |         | P-JD00001 |
+| Yes             |            |           | Walmart | O-AM00001 |
+| No              | Kane       | Perry     |         | P-JS00002 |
+| No              | John       | Anderson  |         | P-MJ00003 |
+| Yes             |            |           | Target  | O-GO00002 |
+
+The **"Handle Id"** in the table above is generated based on the provided logic:
+
+- There are two types of contact types for the **"Handle Id"** i.e. organization and non-organization.
+- The **"Is Organization"** parameter indicates if a contact is categorized as an organization or not, with "yes" for organization and "no" for non-organization.
+- For non-organization contacts, the **"Handle Id"** format is P-WW##### (P: Prefix, W: First Name Initial, W: Last Name Initial, #: Numeric Character).
+- For organization contacts, the **"Handle Id"** format is O-WW##### (O: Prefix, W: First Two Letters of Company Name, #: Numeric Character).
+
+# Display Full Contact Data
+
+**"Display Full Contact Data"** is a field or setting that controls the behavior of the platform regarding the collection and display of contact information for domain registrations. 
+
+When the value of **"Display Full Contact Data"** is set to "True":
+
+The system prompts the user to provide contact information for all four types: Owner Contact, Admin Contact, Tech Contact, and Billing Contact.
+
+When the value of **"Display Full Contact Data"** is set to "False":
+
+Only the contact information for the **"Owner Contact"** is requested during the domain registration process. The other three contact types are not required and should not be requested from the user.
+
+Here is the table summarizing the behavior:
+
+| Field Name                | Value is True                                            | Value is False             |
+| :------------------------ | :------------------------------------------------------- | :------------------------- |
+| display_full_contact_data | Ask for all 4 contact types: Owner, Admin, Tech, Billing | Ask for only Owner Contact |
+
+When a domain is ordered with the value of "False" for the **"Display Full Contact Data"** field:
+
+- Only the **"Owner Contact"** is associated and will be displayed with the domain in the portfolio.
+- The other contacts that were not requested (Admin Contact, Tech Contact, Billing Contact) will not be shown.
+
+# View Domains of a Contact
+
+The **"View Domains of a Contact"** feature refers to a functionality that allows users to retrieve a list of domain portfolios associated with a specific contact. It provides a convenient way to view all the domains that are currently utilizing a particular contact for various roles such as **"Owner"**, **"Admin"**, **"Tech"**, and **"Billing"**. This feature is beneficial for managing and organizing domain portfolios, as it allows users to quickly identify which domains are utilizing a particular contact and in which capacity. It enables users to have a comprehensive overview of the domains associated with a contact, facilitating better management and administration of domain registrations. 
+
+Here is the table to view domains associated with a contact, along with an explanation:
+
+| Domain        | Type                        |
+| :------------ | :-------------------------- |
+| example.com   | Owner                       |
+| example.net   | Owner, Tech                 |
+| example.org   | Owner, Admin, Billing       |
+| example.co.uk | Tech, Billing               |
+| example.io    | Owner, Admin                |
+| example.xyz   | Owner, Tech, Billing        |
+| example.co    | Admin, Billing              |
+| example.ai    | Owner, Admin, Tech, Billing |
+
+In this table : 
+
+- **Domain**: Represents the domain name that is associated with the contact.  
+- **Type**: Indicates the role in which the contact is being used for the respective domain. The types can include Owner, Admin, Tech, and/or Billing. The presence of multiple types means that the contact is used for multiple roles in the domain portfolio.
+
+Click [here](https://superreseller-qa.nominus.host/portfolio/contacts/) to navigate to **"View Domains of a Contact"**.
+
+## Command
+
+The **"Command"** option streamlines the selection process and facilitates the issuing of the appropriate commands for modifying domain contacts.
+
+### Update Contact Command
+
+To access the Update Contact Command , follow the steps mentioned underneath:
+
+1. Navigate to the **"Modify Contact"** page by clicking [here](https://superreseller-qa.nominus.host/forms/contacts/modify).
+2. Locate the **"Reseller"** option.
+3. In the **"Command"** dropdown, select the **“Update Contact”** option. 
+4. Upon selection, all fields related to the selected contact will appear for you to edit, including **"First Name"**, **"Last Name"**, and others.
+
+<Note>
+Important Considerations for Contact Detail Modification:
+- **Initial Validation:** The system initiates a validation check on the current status of the domains associated with the contact you are trying to modify.
+- **Active Association Check:** If the system finds that the contact is associated with any domain that is not marked as **"Expired",** it identifies this as an active association.
+- **Error Display:** In the presence of an active association, the system displays an error message: 
+   `"Command cannot be executed as there is at least one domain currently using this contact."`
+- **Avoiding Errors:** To avoid triggering this error, ensure that the contact you wish to update is not currently in use by any active domain.
+</Note>
+
+After you have filled in the form to update contact details, here's what happens:
+
+1. **Data Saving:** The system saves your request in a table akin to `Request_UpdateContact` which can be found [here](https://www.dropbox.com/s/i6qgnfkdfcomljg/TableDate%20-%20Phase%203.xlsx?dl=0).
+
+2. **Request Visibility:** You can view the request at [this link](https://superreseller-qa.nominus.host/requests/contacts). 
+
+3. **Request Status:** The system automatically assigns the status **"Successful"** to your request.
+
+In addition to these, the system also triggers the following updates:
+
+- **Contact Data:** The system updates the data of the contact in the `Domain_Contacts` table. You can view the updated data [here](https://superreseller-qa.nominus.host/portfolio/contacts/).
+
+- **No Additional Processing:** The system does not create any processing **"Item"** or service.
+
+<Note>Remember, it's crucial to fill in the correct information while **"updating contact detail"** to ensure smooth processing of your request.</Note>
+
+### Delete Contact Command
+
+To access the Delete Contact Command, follow the steps below:
+
+1. Go to the **"Modify Contact"** page by clicking [here](https://superreseller-qa.nominus.host/forms/contacts/modify).
+2. Find the **"Reseller"** option.
+3. In the **"Command"** dropdown, select the **"DeleteContact"** option. 
+
+No additional fields will appear after you choose this command. However, after pressing **"Submit"**, you will see a warning: **"Are you sure that you want to delete this contact?"**. The options **"No, please cancel"** and **"Yes, delete this contact"** will be available to respond.
+
+<Note>
+Important Considerations for Deleting Contact:
+- **Initial Validation:** The system initiates a validation check on the current status of the domains associated with the contact you are trying to modify.
+- **Active Association Check:** If the system finds that the contact is associated with any domain that is not marked as **"Expired",** it identifies this as an active association.
+- **Error Display:** In the presence of an active association, the system displays an error message: 
+   `"Command cannot be executed as there is at least one domain currently using this contact."`
+- **Avoiding Errors:** To avoid triggering this error, ensure that the contact you wish to update is not currently in use by any active domain.
+</Note>
+
+After you have filled in the form to delete a contact, the following occurs:
+
+1. **Data Saving:** The system saves your request in a table similar to `Request_DeleteContact`.
+
+2. **Request Visibility:** You can view the request at [this link](https://superreseller-qa.nominus.host/requests/contacts).
+
+3. **Request Status:** The system automatically assigns the status **"Successful"** to your request.
+
+Besides, the system also performs the following actions:
+
+- **Contact Data:** The data of the selected contact in the `Domain_Contacts` table is deleted. You can verify that the contact data is no longer visible [here](https://superreseller-qa.nominus.host/portfolio/contacts/).
+
+- **No Additional Processing:** The system does not create any processing **"Item"** or service.
+
+<Note>Ensure that you are careful when deleting a contact to ensure that no active domain is left without a corresponding contact.</Note>

@@ -1,0 +1,77 @@
+---
+title: "UpdateContact"
+sidebarTitle: "UpdateContact"
+---
+
+
+The `UpdateContact` endpoint is used to update an existing contact for domain registration.
+
+## Parameters
+
+The following is a list of parameters for the `UpdateContact` endpoint:
+
+| Parameter Name          | Data Type | Description                                                                                                                      |
+|-------------------------|-----------|----------------------------------------------------------------------------------------------------------------------------------|
+| contact_id              | String    | The unique identifier of the contact to be updated.                                                                               |
+| first_name              | String    | The updated first name of the contact.                                                                                            |
+| last_name               | String    | The updated last name of the contact.                                                                                             |
+| organization_name       | String    | The updated organization name of the contact.                                                                                     |
+| is_organization         | Boolean   | Indicates whether the contact is an organization.                                                                                 |
+| email                   | String    | The updated email address of the contact.                                                                                         |
+| country                 | String    | The updated country of the contact.                                                                                               |
+| address                 | String    | The updated address of the contact.                                                                                               |
+| city                    | String    | The updated city of the contact.                                                                                                  |
+| state                   | String    | The updated state of the contact.                                                                                                 |
+| postal                  | String    | The updated postal code of the contact.                                                                                           |
+| phone_country_code      | String    | The updated country code of the contact's phone number.                                                                           |
+| phone_number            | String    | The updated phone number of the contact.                                                                                          |
+| fax_country_code        | String    | The updated country code of the contact's fax number.                                                                             |
+| fax_number              | String    | The updated fax number of the contact.                                                                                            |
+
+## Example Request
+
+The following is an example request for the `UpdateContact` endpoint:
+
+```json
+{
+  "contact_id": "C-12345",
+  "first_name": "John",
+  "last_name": "Doe",
+  "organization_name": "Company Ltd.",
+  "is_organization": true,
+  "email": "john.doe@example.com",
+  "country": "US",
+  "address": "123 Main St",
+  "city": "New York",
+  "state": "NY",
+  "postal": "10001",
+  "phone_country_code": "+1",
+  "phone_number": "555-1234",
+  "fax_country_code": "+1",
+  "fax_number": "555-5678"
+}
+```
+
+## Attributes
+
+The following is a list of the user attributes for the `UpdateContact` endpoint:
+
+| Field             | Description                                  |
+|-------------------|----------------------------------------------|
+| code              | The response code indicating the result of the command. |
+| description       | A brief description providing more information about the result of the command. |
+| request_status    | The status of the request. |
+| request_id        | The unique identifier assigned to the request. |
+
+## Example Response
+
+The following is an example response returned by the `UpdateContact` endpoint:
+
+```json
+{
+  "code": 200,
+  "description": "Command completed successfully",
+  "request_status": "Successful",
+  "request_id": 42
+}
+```

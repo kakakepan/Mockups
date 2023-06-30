@@ -1,0 +1,37 @@
+---
+title: "Transfer Lock"
+sidebarTitle: "Transfer Lock"
+---
+
+**"Transfer Lock"** is a command that is implemented on a domain name to prevent unauthorized or accidental transfers of the domain to another registrar. It is a security measure designed to protect the ownership and control of a domain name. Within the domain details in the **"SuperReseller Dashboard"**, there exists a specific field named **"Transfer Lock,"** which encompasses two distinct values **"Yes"** or **"No"** specified as under in the table:
+
+| Transfer Lock Values | Description                                                                                              |
+| -------------------- | -------------------------------------------------------------------------------------------------------- |
+| **"Yes"**            | When set to **"Yes,"** it restricts the reseller from modifying the contacts associated with the domain. |
+| **"No"**             | When set to **"No,"** it grants the reseller the ability to update the domain's contacts as necessary.   |
+
+## Access the Transfer Lock Command
+
+To set the Transfer Lock for a domain, follow these steps:
+
+1. Navigate to the **"Superreseller dashboard"** [here](https://superreseller-qa.nominus.host/login/?next=/).
+2. Navigate to the [modify form](https://superreseller-qa.nominus.host/forms/domains/modify) for domains.
+3. Select the appropriate reseller from the available options.
+4. Choose the desired domain from the list.
+5. Locate the **"Set Transfer Lock"** field in the form.
+6. Set the value to either **"Yes"** or **"No"** based on your requirements.
+
+<Warning>
+**Important things to consider**:
+
+- By default, the Transfer Lock is set to **"Yes"** for all new domain portfolios.
+- Not all domain extensions support the **"Transfer Lock command"**.
+- Only those extensions with the **"support_transfer_lock"** field set to **"Yes"** will allow this command. If you attempt to update the **"Transfer Lock"** for an unsupported extension, you will encounter the following error: `"Command cannot be executed as the domain extension does not support Transfer Lock."`
+- If a domain was registered within the last 60 days, you cannot update the **"Transfer Lock"**. An error message will appear: `"Command cannot be executed as the domain was registered in the last 60 days."`
+- If an owner update was made within the last 60 days using the **"Change Of Contacts"** command and it affected the **"Owner"** contact, you cannot update the **"Transfer Lock"**. An error message will appear: `"Command cannot be executed as an owner update was made in the last 60 days."`
+</Warning>
+
+## Validation for Previous Requests
+
+Before submitting the form, a validation check ensures that there are no previous requests for the "**Set Transfer Lock"** command for the same domain within the last 10 minutes. If a previous request is found, the following error will be displayed:  
+`"Command cannot be executed as there is a previous request for this command that is in process."`

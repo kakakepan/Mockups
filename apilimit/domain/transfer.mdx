@@ -1,0 +1,61 @@
+---
+title: "TransferDomain"
+sidebarTitle: "TransferDomain"
+---
+The `TransferDomain` endpoint is an API endpoint used for transferring a domain registration to another registrar. It allows you to initiate the transfer process by providing the necessary details and authorization code.
+
+## Parameters
+The following is a list of parameters for the `TransferDomain` endpoint:
+
+| Parameter Name   | Data Type | Description                                                                                            |
+|------------------|-----------|--------------------------------------------------------------------------------------------------------|
+| auth_code        | String    | The authorization code required for transferring the domain to the new registrar.                      |
+| owner_contact    | String    | The contact ID of the domain owner.                                                                     |
+| admin_contact    | String    | The contact ID of the domain administrator.                                                             |
+| tech_contact     | String    | The contact ID of the technical contact for the domain.                                                 |
+| billing_contact  | String    | The contact ID of the billing contact for the domain.                                                   |
+| nameservers      | Array     | An array of name server objects containing the name and IP address of each name server for the domain. |
+| use_superreseller_dns | Boolean | Specifies whether to use the SuperReseller DNS for the domain.                                          |
+| accept_trustee   | Boolean   | Determines whether the reseller accepts the trustee service for the domain.                             |
+
+## Example Request
+The following is an example request for the `TransferDomain` endpoint:
+
+```json
+{
+  "auth_code": "@2934/!1143",
+  "owner_contact": "O-CO00001",
+  "admin_contact": "O-CO00001",
+  "tech_contact": "O-CO00001",
+  "billing_contact": "O-CO00001",
+  "nameservers": [
+    {
+      "name": "ns01.dnsserver.tld",
+      "ip": "192.168.1.1"
+    }
+  ],
+  "use_superreseller_dns": true,
+  "accept_trustee": true
+}
+```
+
+## Attributes
+The following is a list of attributes for the `TransferDomain` endpoint response:
+
+| Field           | Description                                                                       |
+|-----------------|-----------------------------------------------------------------------------------|
+| code            | The response code indicating the result of the command.                           |
+| description     | A brief description providing more information about the result of the command.   |
+| request_status  | The status of the request.                                                        |
+| request_id      | The unique identifier assigned to the request.                                     |
+
+## Example Response
+The following is an example response returned by the `TransferDomain` endpoint:
+```json
+{
+  "code": 200,
+  "description": "Command completed successfully",
+  "request_status": "Successful",
+  "request_id": 42
+}
+```

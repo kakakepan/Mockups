@@ -1,0 +1,91 @@
+---
+title: "Sucessful Webhook"
+sidebarTitle: "Sucessful Webhook"
+---
+
+
+The **"Run Successful"** webhook is a type of webhook that is triggered when a specific action or process associated with a service request is successfully completed. It serves as a notification mechanism to indicate that the requested task has been executed without any errors or issues.
+
+When the "Run Successful" webhook is triggered, it typically initiates a series of actions or updates in the system. These actions can vary depending on the specific context and requirements of the service being processed.
+
+# Succesful Action list
+Here is the comprehensive list of successful actions for each command:
+
+## Renew Domain – Run Successful
+
+When a webhook is triggered that sets an item to **"Run Successful"**, the following action is performed:
+
+- **"Executing_Item_Status_Id"** is updated to **"Run Successful"**.
+
+## Change Of Contact - Run Successful
+
+When a webhook sets an item's status to **"Run Successful"** , the actions depend on whether the original request required additional information/documentation or not.
+
+If additional information/documentation is not required:
+
+- The **"Executing_Item_Status_Id"** is updated to **"Run Successful"**.
+
+If additional information/documentation is required:
+
+| Action                   | Description                          |
+| ------------------------ | ------------------------------------ |
+| Executing_Item_Status_Id | is updated to **"Run Successful"**.  |
+| Request_Main_Status      | is updated to **"Successful"**.      |
+| Domain Portfolio         | is updated with the new contact IDs. |
+
+If additional information/documentation is required and it is a paid service:
+
+| Action                   | Description                          |
+| ------------------------ | ------------------------------------ |
+| Executing_Item_Status_Id | is updated to **"Run Successful"**.  |
+| Request_Main_Status      | is updated to **"Successful"**.      |
+| Domain Portfolio         | is updated with the new contact IDs. |
+| Service Order Status     | is updated to **"Invoiced"**.        |
+
+## SetExpDateForTransfer - Run Successful
+When a webhook triggered, it sets an item status to "Run Sucessful", the actions depends on whether the original request was from an extension that required or not additional information/documentation. For example:
+
+| Action                        | Description                                                                                                                                                                                                                                                                    |
+| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Executing_Item_Status_Id      | is updated to **“Run Succesful"**.                                                                                                                                                                                                                                             |
+| Request_Main_Status           | is updated to **“Successful”**.                                                                                                                                                                                                                                                |
+| Domain_Status_Id              | is updated to **“Registered”**.                                                                                                                                                                                                                                                |
+| Service Order Status          | is updated to **“Invoiced”**.                                                                                                                                                                                                                                                  |
+| Expiration date of the domain | is calculated in the following way: Add the minimal number of **"registration periods"** for that extension to the date entered with the **"SetExpDateForTransfer"** command, and then modify according to the **"Expiration Policy"** described in **"Domain Registration"**. |
+
+## Transfer Lock - Run Successful
+
+When a webhook sets an item's status to **"Run Successful"**, the following action is triggered:
+
+- **"Executing_Item_Status_Id"** should be updated to **"Run Successful"**.
+
+## Create Host – Run Successful
+
+When a webhook sets an item status to **"Run Successful"**, the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Cancelled"**.        |
+| Host_Status_Id           | is updated to **"Active".**           |
+| Request_Main_Status      | is updated to **"Successful"**.       |
+| Create Host              | is updated to **"Sent to Provider"**. |
+
+## Update Host – Run Successful
+
+When a webhook sets an item status to **"Run Successful"**, the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Run Successful"**.   |
+| Request_Main_Status      | is updated to **"Successful"**.       |
+| Update Host              | is updated to **"Sent to Provider"**. |
+
+## Delete Host – Run Successful
+
+When a webhook sets an item status to **"Run Successful"**, the following actions are triggered:
+
+| Action                   | Description                         |
+| ------------------------ | ----------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Run Successful"**. |
+| Host_Status_Id           | is updated to **"Disabled"**.       |
+| Request_Main_Status      | is updated to **"Successful"**.     |

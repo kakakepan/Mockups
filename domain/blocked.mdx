@@ -1,0 +1,26 @@
+---
+title: "Blocked Domains"
+sidebarTitle: "Blocked Domains"
+---
+
+Blocked Domains refer to domain names that are not allowed to be requested or transferred through the commands **"RegisterDomain"** or **"TransferInDomain"** within the platform. The purpose of implementing blocked domains is to prevent duplicate or unauthorized requests for specific domain names.
+When a reseller submits a **"RegisterDomain"** command or a **"TransferInDomain"** command, the system automatically checks if the requested domain is present in the BlockedDomains table. If a match is found, the system generates an error with the code **515**, indicating that the domain is blocked and cannot be processed.
+
+By implementing the blocked domains functionality, resellers can avoid unnecessary requests for domain names that are already restricted or unavailable. This saves them time and effort by preventing unsuccessful attempts to acquire blocked domains.
+
+It is important for resellers to review the list of blocked domains to stay informed about the restrictions and ensure they choose available domain names for their customers' registrations or transfers.
+
+## Add Blocked Domain
+To add a domain to the BlockedDomains table, follow the steps below:
+1. Reseller can promptly add a domain to the BlockedDomains table after running the commands below and verifying that payment has been received:
+
+- RegisterDomain
+- TransferInDomain
+
+2. On the subsequent confirmation page, enter the domains you wish to block.
+
+## Remove Blocked Domain
+There are two cases that the domains should be removed from the BlockedDomains table:
+
+- If a request related to the **"RegisterDomain"** or **"TransferInDomain"** command is updated to the **"Cancelled"** or **"Reversed"** status.
+- When a domain portfolio changes its status to **"Expired"**. This additional logic can be incorporated into the process responsible for updating domains to the **"Expired"** status.

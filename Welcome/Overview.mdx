@@ -1,0 +1,259 @@
+---
+title: "Process Overview"
+sidebarTitle: "Process Overview"
+---
+
+The **"Process Overview"** provides a framework for managing domains and contacts, with distinct categories of commands and various statuses to track the progress and execution of different operations. It involves several key steps in managing domains, contacts, and related operations. The general description of the process is as follows:
+
+# Command Groups
+
+The **“Command groups”** are categorized as sets of commands that enable the structured management and execution of operations related to domains, contacts. Each group focuses on a specific management aspect, simplifying locating and utilizing the required commands within the domain service ecosystem. The commands are grouped into categories such as **“Domains”, “Contact”**, based on their respective functions and purposes as stated underneath:
+
+| Field    | Description                                 |
+| -------- | ------------------------------------------- |
+| Domains  | All commands related to domain management.  |
+| Contact  | All commands related to contact management. |
+| Requests | All commands related to command requests.   |
+
+To view a comprehensive list of commands, please visit the following link: Commands.
+
+## Command Categories
+
+Commands related to domains, contact, or hosting can be divided into two categories: **"Informational Commands"** and **"Execution Commands"**.
+
+| Command Category       | Description                                                                                                                                                      |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Informational Commands | Informational commands only display information about an object. For example, the command "Status Domain" provides details about the current status of a domain. |
+| Execution Commands     | Execution commands create, modify, or delete an object. For example, the "Create Domain" command is used to create a new domain.                                 |
+
+<Warning>Be careful when using execution commands as they can perform irreversible actions such as deleting an object permanently.</Warning>
+
+# Domain Requests
+
+The **"Domain Requests"** page displays all the requests related to domain names. It provides essential information about each request, such as the **"request ID, reseller email, command, domain, source, request status, and request date"**. The **“Domain Requests”** are used to generate a unique **“Request Id”** when running an **“Execution Command”** for a domain via API or web form. This **"Domain Request”** tracks the command’s execution. The Request Id is associated with different **“Request Statuses”** that indicate the progress and outcome of the command, including **“In Process”**, **“Pending”**, **“Successful”**, or **“Cancelled”**. This Request Id and its corresponding status are essential for effectively monitoring and managing domain-related operations.
+
+## Domain Request Fields
+
+The essential information for the domain requests fields is displayed in the following table:
+
+| Field          | Description                                                    |
+| -------------- | -------------------------------------------------------------- |
+| Id             | The unique identifier of the request.                          |
+| Reseller Email | The email address of the reseller associated with the request. |
+| Command        | The command executed for the domain.                           |
+| Domain         | The domain name associated with the request.                   |
+| Source         | The source of the request (API or web form).                   |
+| Request Status | The status of the request.                                     |
+| Request Date   | The date and time when the request was made.                   |
+
+## Viewing Domain Requests Details
+
+- Clicking on the Id of a request will open a layer displaying the specific data entered for that request. The data can be obtained from commands such as **"Request Register Domain"**, **"Request Update DNS server Domain"**,** "Request Add Fields"**, or **"Request Add Documentation"**.
+- Clicking on the Request Status will open a layer showing the log of changes made to the request status using the **"Request Main Status Log"** command.
+
+## Request Statuses
+
+The Request Status field indicates the progress and outcome of the command execution. The following request statuses are used:
+
+| Status     | Description                                         |
+| ---------- | --------------------------------------------------- |
+| In Process | The request is currently being executed.            |
+| Pending    | Additional information is required for the request. |
+| Successful | The request was successfully executed.              |
+| Cancelled  | The request was cancelled.                          |
+
+<Note>
+Note:
+- Please note that the request status may change over time as the execution progresses.
+- When viewing the request details or request status log, be cautious not to modify any data unless necessary.
+</Note>
+
+# Domain Portfolio
+
+A **"domain portfolio"** refers to the collection of domain names owned by a user. Each domain portfolio has a creation date and an expiration date. All commands related to **"modification"** or **"renewal"** reference a specific domain portfolio.
+
+## Domain Portfolio Fields
+
+The **"Domain portfolio"** provides essential information and displays the following fields from the **"Domain Portfolio":**
+
+| Field                              | Description                                                                                                                                                                                                                                            |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Provider Id                        | The ID of the domain extension provider. This ID should be obtained from the "Settings Providers" and corresponds to the extension of the domain.                                                                                                      |
+| Domain Status Id                   | The status of the domain portfolio. When creating a portfolio, this field should have the value "1" which means it is "In Process". The list of possible statuses for a domain portfolio can be found in the "Domain Status".                          |
+| Expiration Date                    | The expiration date of the domain in the portfolio.                                                                                                                                                                                                    |
+| Renewal Date                       | The renewal date of the domain in the portfolio.                                                                                                                                                                                                       |
+| Transfer Lock                      | Transfer Lock prevents unauthorized domain transfers by requiring explicit authorization and additional authentication steps, ensuring the security and integrity of domain ownership. A Yes/No field indicates whether the domain transfer is locked. |
+| Client Hold                        | Client Hold restricts certain actions, such as domain transfer or changes to settings, for added security and prevention of unauthorized modifications. A Yes/No field indicates whether the domain is on client hold.                                 |
+| Auto Renew                         | Auto Renew automatically renews a domain registration before it expires, ensuring uninterrupted ownership and preventing accidental domain expiration. A Yes/No field indicates whether the domain should be automatically renewed.                    |
+| Associated Request Main Domain Ids | The list of "Request Main Domain Ids" associated with the domain portfolio. This includes requests such as "Request Register Domain" or "Request Update DNS server Domain".                                                                            |
+
+## Domain Portfolio Statuses
+
+The domain portfolio can have different statuses, indicating its current condition. The possible statuses are:
+
+| Status                | Explanation                                                      |
+| --------------------- | ---------------------------------------------------------------- |
+| In Process            | The domain portfolio has been created but is not active.         |
+| Registered            | The domain is registered with an assigned expiration date.       |
+| Soon to Expire        | The domain will expire soon.                                     |
+| Expired - Recoverable | The domain has expired, but it is possible to restore and renew. |
+| Expired               | The domain has expired and cannot be renewed.                    |
+
+<Warning>
+- When viewing domain portfolio details avoid making unnecessary modifications.
+- The displayed information is intended for viewing purposes only.
+</Warning>
+
+# Contact Requests
+
+The **"Contact Requests"** page allows you to view and manage all the requests related to domain names. 
+
+## Contact Requests Fields
+
+The Contact Requests page shows information from the "Request Main Contact" . The essential information for the contact requests fields is displayed in the following table:
+
+| Field          | Description                                                    |
+| -------------- | -------------------------------------------------------------- |
+| Id             | The unique identifier of the request.                          |
+| Reseller Email | The email address of the reseller associated with the request. |
+| Command        | The command executed for the domain.                           |
+| Contact Id     | The contact Id associated with the contact.                    |
+| Source         | The source of the request (API or web form).                   |
+| Request Status | The status of the request.                                     |
+| Request Date   | The date and time when the request was made.                   |
+
+## Contact Request Statuses
+
+Whenever an **"Execution Command"** related to a contact is run using the API or an online web form, a **"Request Id"** is created. The "**Request Id"** helps track the execution of a specific command for contact requests. The **"Request Id"** can have the following **"Request Statuses"**:
+
+| Status     | Explanation                              |
+| ---------- | ---------------------------------------- |
+| In Process | The request is currently being executed. |
+| Successful | The request was successfully executed.   |
+| Cancelled  | The request was cancelled.               |
+
+<Warning>
+- When viewing contact request details avoid making unnecessary modifications.
+- The displayed information is intended for viewing purposes only.
+</Warning>
+
+# Contact Portfolio
+
+The **"Contact Portfolio"** refers to the collection of contact information associated with domains. When using the **"Create Contact"** command, you can add a new contact, and its usability is indicated by different statuses.
+
+| Status   | Description                 |
+| -------- | --------------------------- |
+| Active   | The contact can be used.    |
+| Inactive | The contact cannot be used. |
+
+To work on and manage the contact portfolio, follow these steps:
+
+1. Open the contact page by clicking [here](https://superreseller-qa.nominus.host/forms/contacts/create).
+2. Fill in the required contact information for the new contact. Ensure that you provide accurate details for all the necessary fields.
+3. Click on the  **"Create"** button to to submit the form.
+4. After submitting the form, verify if the post is successful. Look for a response that indicates the handle ID of the newly created contact.
+5. Note that the handle ID is for future reference or any subsequent actions related to the created contact.
+
+# Status Log
+
+The Status Log page provides a log of actions involving updates to the **"Request Main Status"** field of domain requests. The following fields are displayed for the status log:
+
+| Field      | Description                                                         |
+| ---------- | ------------------------------------------------------------------- |
+| Id         | Corresponds to the "Status Log Id".                                 |
+| Domain     | The domain related to the request.                                  |
+| Reseller   | The name of the reseller obtained from the "Reseller Id".           |
+| Command    | Displays the command name if the update came from a command.        |
+| Webhook    | Shows the webhook name if the update came from a webhook.           |
+| New Status | The status name that the command or webhook updated the request to. |
+| Log Date   | The date when the status was updated.                               |
+
+<Note>
+Note:
+The value of "Request Main Status" can change for the following reasons:
+- The request was in "Pending" status, and additional fields or documentation were added, resulting in the new status being "In Process".
+- A webhook related to the processing item was triggered, updating the status to either "Successful" or "Cancelled".
+</Note>
+
+# Service Orders
+
+**"Service Orders"** are triggered when a paid service is involved in the execution of a command. Service Orders ensure proper tracking and invoicing for services rendered.
+
+## Service Order Statuses
+
+ Service Orders help with the accounting process and can have different statuses, such as **"In Process"**, **"Cancelled"**, or **"Invoiced"** stated underneath:
+
+| Status     | Explanation                                                        |
+| ---------- | ------------------------------------------------------------------ |
+| In Process | The Service Order has been created but is not yet active.          |
+| Cancelled  | The Service Order has been cancelled, and no invoice is generated. |
+| Invoiced   | The Service Order has been completed, and an invoice is generated. |
+
+## Service Order Execution
+
+This section provides an overview of the steps involved in executing a Service Order.
+
+### Step # 1: Triggering a Service Order
+
+- Determine if the command being executed involves a paid service.
+- If the command involves a paid service, a Service Order is automatically triggered.
+
+### Step# 2: Monitoring Service Order Status
+
+- Access the **"Process Overview"** option in the system.
+- Locate the relevant Service Order for domain registration.
+
+### Step# 3:Check the status of the Service Order to determine its progress.
+
+- If the status is **"In Process"**, the Service Order has been created but is inactive.
+- If the status is **"Cancelled"**, the Service Order has been cancelled, and no invoice is generated.
+- If the status is **"Invoiced"**, the Service Order has been completed, and an invoice is generated.
+
+### Step# 4: Completing Service Order Execution
+
+- Execute the necessary actions to fulfill the Service Order requirements.
+- Once the service is successfully executed (e.g., domain registration is completed), the status is updated to Invoiced.
+- An Invoice Id and an Invoice Date are assigned to the Service Order.
+
+# Webhooks
+
+The **"Webhooks"** feature enables users to receive real-time notifications for successful domain registrations or transfers requested through the **"Register Domains"** or **"Transfer Domain"** commands. Setting up a webhook will notify you once a domain is successfully registered or transferred.
+
+## Setting up Webhooks
+
+Follow the steps below to set up the webhook:
+
+1. Obtain a URL to receive the webhook notifications. Ensure that the URL supports the necessary HTTP requests.
+2. Construct the webhook URL, including the placeholders [Domain] and [Expiration Date] in the required format (YYYY-MM-DD).
+3. Configure your system or application to listen for incoming HTTP requests at the webhook URL.
+
+## Webhook Trigger Conditions
+
+The webhook will only be triggered under the following conditions:
+
+1. The domain requested through the "Register Domains" or "Transfer Domain" commands is not immediately activated.
+2. The response code for the domain registration or transfer is 201 or 202.
+
+## Real-Time Domain Registration
+
+If a domain is successfully registered in real-time, the webhook for that domain will not run. In such cases, you can obtain the domain information from the same API used for the registration.
+
+## Checking Domain Status
+
+Setting up the webhook is optional. If you prefer not to use webhooks, you can check the status of your domain using the **"Status"** API command. This command provides information about the domain's registration status.
+
+<Note>Ensure that you have appropriate access and authorization to perform API commands and access domain information.</Note>
+
+## Example Webhook URL:
+
+Here's an example of a webhook URL with the required placeholders:
+
+[Example](https://example.com/webhooks?domain=[Domain]&expiration=[ExpirationDate])
+
+Make sure to replace [Domain] with the actual domain name and [Expiration Date] with the domain's expiration date in the format YYYY-MM-DD.
+
+# Process Diagram
+
+The **"Process Diagram"** is a graphical representation that depicts the sequential flow of activities and steps involved in the **"Superreseller"** workflow. It offers a visual and organized overview of tasks, their dependencies on each other, and the overall progression from the beginning to the end.
+
+![roadmap](/images/roadmap.png)

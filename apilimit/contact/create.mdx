@@ -1,0 +1,79 @@
+---
+title: "CreateContact"
+sidebarTitle: "CreateContact"
+---
+
+
+The `CreateContact` endpoint is an API endpoint used to create a new contact.
+
+## Parameters
+
+The following is a list of parameters for the CreateContact endpoint:
+
+| Parameter Name       | Data Type | Description                                                       |
+|----------------------|-----------|-------------------------------------------------------------------|
+| internal_contact_id  | String    | The internal identifier of the contact.                           |
+| first_name           | String    | The first name of the contact.                                    |
+| last_name            | String    | The last name of the contact.                                     |
+| organization_name    | String    | The name of the organization associated with the contact.         |
+| is_organization      | Boolean   | A boolean value indicating whether the contact is an organization.|
+| email                | String    | The email address of the contact.                                 |
+| country              | String    | The country associated with the contact.                          |
+| address              | String    | The address of the contact.                                       |
+| city                 | String    | The city of the contact.                                          |
+| state                | String    | The state or region of the contact.                               |
+| postal               | String    | The postal code of the contact.                                   |
+| phone_country_code   | String    | The country code of the contact's phone number.                   |
+| phone_number         | String    | The phone number of the contact.                                  |
+| fax_country_code     | String    | The country code of the contact's fax number.                     |
+| fax_number           | String    | The fax number of the contact.                                    |
+
+## Example Request
+
+The following is an example request for the `CreateContact` endpoint:
+
+```json
+{
+  "internal_contact_id": "287",
+  "first_name": "Will",
+  "last_name": "Knott",
+  "organization_name": "Company Ltd.",
+  "is_organization": true,
+  "email": "dontreply@dontreply.com",
+  "country": "US",
+  "address": "1, Main st.",
+  "city": "Springfield",
+  "state": "CO",
+  "postal": "81073",
+  "phone_country_code": "1",
+  "phone_number": "(111)1111111",
+  "fax_country_code": "1",
+  "fax_number": "(111)1111111"
+}
+```
+
+## Attributes
+
+The following is an attribute for the `CreateContact` endpoint:
+
+| Attribute          | Description                                                       |
+|--------------------|-------------------------------------------------------------------|
+| code               | The response code indicating the result of the command.            |
+| description        | A brief description providing more information about the result.   |
+| request_status     | The status of the request.                                        |
+| request_id         | The unique identifier assigned to the request.                     |
+| handle_id          | The handle ID of the newly created contact.                        |
+
+## Example Response
+
+The following is an example response returned by the `CreateContact` endpoint:
+
+```json
+{
+  "code": 200,
+  "description": "Command completed successfully",
+  "request_status": "Successful",
+  "request_id": 42,
+  "handle_id": "O-CO00001"
+}
+```

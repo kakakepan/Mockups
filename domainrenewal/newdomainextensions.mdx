@@ -1,0 +1,35 @@
+---
+title: "New Domain Extension Settings"
+sidebarTitle: "New Domain Extension Settings"
+---
+
+Superseller dashboard provide additional extension field settings that provide more control over domain registration and renewal.
+
+The purpose of each field is as follows:
+
+1. **Registration Period**: This field allows specifying the duration for which a domain can be registered. It determines the available options for the **"Years"** field in the domain registration form. The registration period is defined as an interval, represented by a dash **("-")**, indicating the minimum and maximum number of years allowed for registration. For example, **"1-10 years"** means the domain can be registered for any duration between 1 and 10 years. Some extensions may have specific registration period options.
+<Note>The option for a 1-year registration is intentionally not available for this extension.</Note>
+
+2. **Renewal Period**: This field defines the duration for which a domain can be renewed. It specifies the available renewal options when extending the registration period for an existing domain.
+
+3. **Grace Period**: The grace period is the additional time provided after the domain's expiration date during which the domain can still be renewed without incurring any penalties or losing ownership. It allows domain owners a grace period to renew their domains before they enter the redemption period.
+
+4. **Redemption Period**: The redemption period is a period following the grace period during which the expired domain can still be redeemed. During this time, the domain owner can typically restore the domain by paying a redemption fee in addition to the renewal fee.
+
+5. **Explicit Renewal Always**: This feature ensures that explicit renewal is always required to extend the domain registration. It prevents automatic renewal and prompts the domain owner to actively confirm the renewal.
+6. **Expiration Date**: This field represents the date when a domain registration will expire. It is a crucial piece of information that indicates the validity period of a registered domain.
+
+<Note>Within the domain portfolio feature, the Admin reseller can manually alter the domain portfolio dates, specifically "Renewal Date" and "Expiration Date."</Note>
+
+## Expiration Date
+To provide accurate expiration dates for domains, we have implemented an enhanced logic that builds upon the previous phase's functionality. Previously, updating the item ID related to **"domain registration"** to **"Run Successful"** triggered the update of the related domain portfolio to **"Registered"**. Now, we extend this logic to include the update of the **"Expiration Date"** field as well.
+
+The calculation of the **"Expiration Date"** takes into consideration three main factors:
+
+1. Date of Registration: It is determined by the date when the domain is updated to **"Registered"**. This serves as the starting point for calculating the domain's validity period.
+
+2. Registration Period: The number of years for which the domain is registered is taken into account. This value is based on the selection made in the "Registration Period" field during the domain registration process.
+
+3. Registration Policy: The **"Registration Policy"** associated with the domain determines any adjustments that need to be made to the expiration date. Please see [here](/domainrenewal/registrationpolicy) for more details.
+
+By considering these factors, the **"Expiration Date"** is calculated to ensure the domain's expiry aligns with the selected registration period and adheres to the rules defined by the associated **"Registration Policy"**. This enhancement aims to provide accurate and reliable information regarding the expiration of registered domains.

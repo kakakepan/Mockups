@@ -1,0 +1,36 @@
+---
+title: "CheckContact"
+sidebarTitle: "CheckContact"
+---
+
+The `CheckContact` endpoint is an API endpoint used to check the availability and status of a contact in a domain registration system. It allows you to verify whether a specific contact exists and retrieve information about its availability.
+
+## Parameters
+The following is a parameter for the `CheckContact` endpoint:
+| Parameter Name | Data Type | Description                                     |
+|----------------|-----------|-------------------------------------------------|
+| contact        | String    | The handle ID of the contact to check.          |
+
+## Example Request
+The following is an example request for the `CheckContact` endpoint:
+```curl
+curl -X 'GET' \
+  'https://superreseller-qa.nominus.host/api/v2/contacts/P-TF00001/check' \
+  -H 'accept: application/json' \
+  -H 'X-API-Token: ZvRF6gnqYO7uJiZyEBXxLLZETm2GOjLQ'
+```
+## Attributes
+The following is an attribute for the `CheckContact` endpoint:
+| Attribute    | Description                                            |
+|--------------|--------------------------------------------------------|
+| code         | The response code indicating the result of the command. |
+| description  | A brief description providing more information about the result of the command. |
+
+## Example Response
+The following is an example response returned by the `CheckContact` endpoint:
+```json
+{
+  "code": 214,
+  "description": "Contact not available"
+}
+```

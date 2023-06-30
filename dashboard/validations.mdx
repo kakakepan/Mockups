@@ -1,0 +1,60 @@
+---
+title: "Validation"
+sidebarTitle: "Validation"
+---
+
+The **"Validation"** feature enables the definition and management of validation rules for fields in the online forms. These validation rules help ensure data accuracy and completeness. Validating the data entered by resellers is crucial to ensure error-free processing and accurate domain registrations.
+
+## Validation Rules
+
+Proper data validation is essential to prevent delays and potential issues with domain registrations. Communicating accurate validation rules to resellers to facilitate proper data submission is equally important. The **"Validation Rules"** page provides an overview of the validation rules for various fields.
+
+### Access the Validation Rules
+
+1. Go to the **"Price & Settings"** tab.
+
+2. The **"Validation Rules"** page displays a comprehensive list of validation rules categorized into three types: categorized into three types of validation rules:
+
+   | Validation Rule Category | Description                                                                        |
+   | ------------------------ | ---------------------------------------------------------------------------------- |
+   | "Regex"                  | These rules validate the entered text using regular expressions.                   |
+   | "Is Required"            | These rules indicate whether a field is required.                                  |
+   | "Database"               | These rules indicate if a field requires a database check and are marked in green. |
+
+3. Click on the **"Validation Rules"** option, which provides information such as the following:
+
+| Parameter                             | Description                                                                          |
+| ------------------------------------- | ------------------------------------------------------------------------------------ |
+| Action                                | Allows editing of the fields.                                                        |
+| Form                                  | Name of the form. For example: "Register Domain".                                    |
+| Field Name                            | Name of the field. For example: Domain.                                              |
+| Field Description                     | Description of field to appear in Swagger: The domain to register.                   |
+| Data Type                             | Possible values: integer, string, etc.                                               |
+| REGEX Validation                      | Regular expression used to validate the input.                                       |
+| REGEX Error Description               | Description of the error when the input does not match the regex pattern.            |
+| Is Required Field                     | Indicates whether the field is required or not either "Yes" or "No".                 |
+| Is Required Notes                     | This should be a text field that we could use for describing the required field.     |
+| Required Error Description            | Description of the error when the required field is not provided.                    |
+| Database Validation                   | Indicates whether the field requires a database validation either "Yes" or "No".     |
+| Database Validation Notes             | This should be a text field that can be used for describing the database validation. |
+| Database Validation Error Description | Description of the error when the database validation fails.                         |
+
+## Display Additional Error Description
+
+Additional error descriptions should appear after the main error code message. This includes the error text from the **"REGEX Error Description,"** **"Is Required Error Description,"** and "**Database Validation Error Description" **fields. An example of how error messages should appear is shown below:
+
+| Action      | Form            | Field Name       | Field Description      | Data Type | REGEX Validation | REGEX Error Description                                     | Is Required Field | Is Required Notes | Required Error Description                                       | Database Validation | Database Validation Notes                          | Database Validation Error Description                                        |
+| ----------- | --------------- | ---------------- | ---------------------- | --------- | ---------------- | ----------------------------------------------------------- | ----------------- | ----------------- | ---------------------------------------------------------------- | ------------------- | -------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Edit Fields | Create Contact  | Fax_Country_Code | Fax Country Code       | String    | ^.{4,30}$        | It should be a required field, if "Fax Number" is entered   | Yes               | (Optional)        | Code 570: Field [Field_Name] is missing.                         | No                  | Add the Correct Format                             | Code 570: [Entered Data] is invalid Handle ID                                |
+| Edit Fields | Register Domain | Domain_Name      | The Name of the domain | String    | ^.{2,180}$       | Code 570: Did not pass REGEX validation \[REGEX VALIDATION] | Yes               | Yes               | Code 515: Command cannot be executed as the domain is duplicated | Yes                 | We check that the domain has not been used before. | Code 515: Command cannot be executed as the domain is already in our systems |
+
+<Warning>The **"Form"** and **"Data Type"** fields are not editable.</Warning>
+
+## Validation for All the Forms
+
+To apply the defined validation rules from the **"Validation Rules"** to **"online forms"**, follow these steps:
+
+1. Update the validation rules on the **"Validation Rules"** according to your requirements.
+2. You can update the rules in real-time using a process that runs once a day.
+3. Alternatively, you can manually update the rules as needed.
+4. Resellers can adjust their systems to send data adhering to the defined rules based on the information provided in Swagger.

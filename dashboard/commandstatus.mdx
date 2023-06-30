@@ -1,0 +1,34 @@
+---
+title: "Command Status Tracking"
+sidebarTitle: "Command Status Tracking"
+---
+
+The Super Reseller platform provides a way for resellers to synchronize the command status they send to the platform.  Resellers need to be informed when the status of their command requests changes.  To address this, the platform introduces the use of **"Request Ids"** and **"Request Status"** to keep users informed about the status of their command requests.
+
+## Request Id
+
+A request ID is a unique identifier assigned to a specific domain registration request. It is used to track and identify individual requests within a system or across multiple systems. When a domain registration command is executed or a request is made, a request ID is typically generated and associated with that particular request. Assigning a request ID to a domain registration request enables easy tracing of the request flow, identification of errors or issues, and provides better support or analysis when needed including logging, monitoring, troubleshooting, and auditing.
+
+### Accessing Request Id
+
+1. Identify commands that are informational.
+2. Check if the command starts with **"Check"** or **"Status"**.
+3. If the command starts with **"Check"** or **"Status"**, mark it as informational and skip generating a **"Request Id"**.
+4. For commands that add or modify a **"Domain"**, **"Contact"**, or **"Host"**: Generate a "**Request Id"** for these commands.
+5. Navigate to the **"Commands Settings"** page.
+6. Set the values in the **"Create Request Id"** column as **"Yes"** or **"No"** for each command.
+7. For all the informational commands starting with **"Check"** or **"Status"**, set the value in the **"Create Request Id"** column as **"No"**.
+8. Save the changes made to the Commands Settings page.
+
+## Request Status
+
+In domain registration, the request status refers to the current state or condition of a domain registration request. It indicates the progress or outcome of the request and provides information about its status in the registration process.
+
+### Accessing Request Status
+
+1. Navigate to the **"Prices & Settings"** tab.
+2. Locate the **"Domain Statuses"** section.
+3. Access the settings or configuration area for the **"Domain Statuses"** section.
+4. The **"Request Statuses"** page, lists all the possible request statuses that need to be organized and presented.
+5. The **"Visible As"** option displays the text for all the request statuses.
+6. Save the changes made to the **"Request Statuses"** page.

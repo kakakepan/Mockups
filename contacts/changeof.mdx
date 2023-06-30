@@ -1,0 +1,66 @@
+---
+title: "Change of Contact"
+sidebarTitle: "Change of Contact"
+---
+
+The **"Change Of Contacts"** command allows clients to change the contacts associated with a specific domain portfolio. Depending on the domain extension, a domain portfolio might be associated with one or multiple contacts.
+
+Accessing the **"Change of Contacts"** Form:
+
+1. Navigate to the **"Modify Contact Form"** by clicking [here](https://superreseller-qa.nominus.host/forms/domains/modify).
+
+2. Select the appropriate **"Reseller"** and **"Domain"** for which you wish to change contacts.
+
+3. In the command list, select **"Change Of Contacts".** 
+
+<Note>Note: Depending on the domain extension, you might see different contact fields. This is managed by the field `display_full_contact_data`.</Note>
+
+## Before Submission
+
+Before you submit the form, the system checks the following:
+
+- If there's a successful request for the **"Change Of Contacts" **command for the same domain within the last 10 minutes. If so, you'll see the following error message:
+  `"Command cannot be executed as there is a previous request for this command that it is in process."`
+- If there's a pending request for the** "Change Of Contacts"** command for the same domain. If so, you'll see the following error message:
+  `"Command cannot be executed as there is a pending request for this command that is open."`
+
+## Fee for Changing Contacts
+
+Updating contacts for domains that display all four contacts** "(Owner, Admin, Tech, Billing)"** is free. However, if you're updating an **"Owner"** contact for certain extensions, you might be charged a fee. The "**Owner Update Fee" **field in the extension list indicates whether a fee applies.
+
+If you're updating an extension with an **"Owner Update Fee"**, you'll see a warning message after clicking **"Submit"** but before the data is submitted. Only after you click** "Accept Owner Update Fee"** is the form submitted.
+
+## After Submission
+
+Once you submit the form, the following occurs:
+
+- Your data is saved as a request, visible at [this link](https://superreseller-qa.nominus.host/requests/domain).
+
+- The system checks whether the **"Change Of Contacts"** command requires additional information or documentation. Depending on this, the request might be updated with different statuses.
+
+### If Additional Information/Documentation is Needed
+
+If additional information or documentation is needed, the request status is set to **"Pending"**. You can add this additional information or documentation at the following pages:
+
+- [Additional Fields Form](https://superreseller-qa.nominus.host/forms/domains/additional/fields)
+- [Additional Documentation Form](https://superreseller-qa.nominus.host/forms/domains/additional/documentation)
+
+Upon adding the necessary data, the original request is updated to **"In Process"**. You also have the option to cancel the request if you're unable to provide the necessary information or documentation.
+
+In this case: 
+
+| Action                                                          | Free Extension | Paid Extension |
+| --------------------------------------------------------------- | -------------- | -------------- |
+| A processing **"Item"** is created and published in an XML page | ✔️             | ✔️             |
+| A service is created                                            | ❌              | ✔️             |
+
+### If No Additional Information/Documentation is Needed
+
+If no additional information or documentation is needed, the request status is set to **"Successful"**.
+
+In this case:
+
+| Action                                                          | Free Extension | Paid Extension |
+| --------------------------------------------------------------- | -------------- | -------------- |
+| A processing **"Item"** is created and published in an XML page | ✔️             | ✔️             |
+| A service is created                                            | ❌              | ✔️             |

@@ -1,0 +1,108 @@
+---
+title: "Reverse Webhook"
+sidebarTitle: "Reverse Webhook"
+---
+
+The Reverse webhook is a new type of webhook called **"Reversed"** that allows for the reversal of a request that has already been marked as **"Run Successful"**. While it is not commonly used, this webhook provides a way to handle cases where a completed service needs to be reversed due to certain circumstances.
+
+Previously, once a webhook was marked as **"Run Successful"**, it couldn't be changed to **Sent to Provider"** or **"Cancelled"**. Any attempt to do so would result in an error message stating that the **"Run Successful"** status had already been executed.
+
+With the Reverse webhook, it can only be triggered if the executing item is currently in the **"Run Successful"** status. This ensures that the reversal process can only be initiated when appropriate.
+
+When the Reverse webhook is triggered, specific actions will be taken based on the command that was reversed. These actions are similar to those performed when the **"Cancelled"** webhook is triggered. The exact details of these actions should be reviewed for each command.
+
+By implementing the Reverse webhook, we have a means to handle situations where a previously completed service needs to be reversed. This adds flexibility and control to the management of service requests and ensures that the appropriate actions are taken for reversals.
+
+# Reverse Action list
+Here is the comprehensive list of reverse actions for each command:
+
+## RegisterDomain - Reversed
+When a webhook sets an item's status to "Reversed", the following actions are triggered:
+
+| Action                        | Description                                                                                                                                                                                                                                                                    |
+| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Executing_Item_Status_Id      | is updated to **“Reversed"**.                                                                                                                                                                                                                                             |
+| Request_Main_Status           | is updated to **“Reversed by RSS”**.                                                                                                                                                                                                                                                |
+| Domain_Status_Id              | is updated to **“Reversed by RSS”**.                                                                                                                                                                                                                                                |
+| Service Order Status          | is updated to **“Reversed”**.                                                                                                                                                                                                                                                  |
+| Service Order Trustee Service Status | is updated to **“Reversed”**. |
+
+## UpdatedDNSserverDomain - Reversed
+When a webhook sets an item's status to "Reversed", the following actions are triggered:
+
+| Action                        | Description                                                                                                                                                                                                                                                                    |
+| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Executing_Item_Status_Id      | is updated to **“Reversed"**.                                                                                                                                                                                                                                             |
+| DNS Server Update          | roll back the DNS Server Update and set the previous DNS Servers                                                                                                                                                                                                                                                |
+
+## RenewDomain - Reversed
+When a webhook sets an item's status to "Reversed", the following actions are triggered:
+
+| Action                        | Description                                                                                                                                                                                                                                                                    |
+| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Executing_Item_Status_Id      | is updated to **“Reversed"**.                                                                                                                                                                                                                                             |
+| Request_Main_Status           | is updated to **“Reversed by RSS”**.                                                                                                                                                                                                                                                |
+| Domain_Status_Id              | is updated to **“Reversed by RSS”**.                                                                                                                                                                                                                                                |
+| Expiration date of the domain          | is rolled back to the previous value.                                                                                                                                                                                                                                                  |
+| Domain Portfolio | is updated to **“Auto Renew = No”**. |
+| Service Order Status          | is updated to **“Reversed”**, If Service Order has been updated in current month. If Service Order has been updated in a previous month, will not be updated to "Reversed". Instead it will create a Credit Note.                                                                                                                                                                                                                                                |
+| Service Order Late Renew Status | is updated to **“Reversed”**.  |
+
+## TransferLock - Reversed
+When a webhook sets an item's status to "Reversed", the following actions are triggered:
+
+| Action                        | Description                                                                                                                                                                                                                                                                    |
+| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Executing_Item_Status_Id      | is updated to **“Reversed"**.                                                                                                                                                                                                                                             |
+| Request_Main_Status           | is updated to **“Reversed by RSS”**.                                                                                                                                                                                                                                                |
+| SetTransferLock             | is rolled back to the previous value.                                                                                                                                                                                                                                                |
+
+## ChangeOfContact - Reversed
+When a webhook sets an item's status to "Reversed", the following actions are triggered:
+
+| Action                        | Description                                                                                                                                                                                                                                                                    |
+| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Executing_Item_Status_Id      | is updated to **“Run Succesful"**.                                                                                                                                                                                                                                             |
+| Request_Main_Status           | is updated to **“Successful”**.                                                                                                                                                                                                                                                |
+| Domain Portfolio            | is rolled back to the previous **“contact_id”**.                                                                                                                                                                                                                                                |
+| Service Order Status          | is updated to **“Reversed”**, If Service Order has been updated in current month. If Service Order has been updated in a previous month, will not be updated to "Reversed". Instead it will create a Credit Note.                                                                                                                                                                                                                                                |
+
+## SetExpDateForTransfer – Reversed
+When a webhook sets an item's status to **"Reversed"** , the following actions are triggered:
+- The **"Executing_Item_Status_Id"** is updated to **“Reversed”**.
+- The **"Request_Main_Status** is updated to **“Reversed”**.
+
+## Create Host – Reversed
+
+When a webhook sets an item status to **"Reversed",** the following actions are triggered:
+
+| Action                   | Description                          |
+| ------------------------ | ------------------------------------ |
+| Executing_Item_Status_Id | is updated to **"Reversed"**.        |
+| Host_Status_Id           | is updated to **"Reversed by RSS".** |
+| Request_Main_Status      | is updated to **"Reversed by RSS"**  |
+
+## Update Host – Reversed
+
+When a webhook sets an item status to **"Reversed",** the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Reversed"**.         |
+| Host_Status_Id           | is updated to **"Reversed by RSS"**.  |
+| Request_Main_Status      | is updated to **"Reversed by RSS"**.  |
+| Host portfolio values    | should be updated to original values. |
+
+## Delete Host - Reversed
+
+When a webhook sets an item status to **"Reversed"**, the following actions are triggered:
+
+| Action                   | Description                          |
+| ------------------------ | ------------------------------------ |
+| Executing_Item_Status_Id | is updated to **"Reversed"**.        |
+| Host_Status_Id           | is updated to **"Active"**.          |
+| Request_Main_Status      | is updated to **"Reversed by RSS"**. |
+
+# Credit Note
+A credit note is issued as a refund to the client for a service that has been reversed. When a webhook indicating a reversal is executed, and the corresponding service order was previously invoiced, a credit note is required for the client.
+

@@ -1,0 +1,74 @@
+---
+title: "Account Balance"
+sidebarTitle: "Account Balance"
+---
+
+The **"Account Balance"** feature is used to keep track of the amount of money a reseller has available at any given moment to order new services. 
+
+## Calculating Account Balance
+
+The **"Account Balance"** is calculated based on the reseller's previous **"Final Balance"** statement, and it involves two main factors:
+
+1. Subtracting **"invoiced service orders"** received since the last statement.
+2. Summing the **"deposits"** received since the last statement.
+
+   To illustrate this calculation, consider the following example:
+
+| Previous Month Statement | Final Balance (USD)    |
+| :--------------------------- | --------------------------- |
+| Final Balance                | USD 100                     |
+| Account Balance              | USD 100                     |
+| **Current Month**            | **Invoiced Service Orders** |
+| Order 1                      | USD 30                      |
+| Order 2                      | USD 30                      |
+| Account Balance              | USD 40 (USD 100 - USD 60)   |
+| **Current Month**            | **Additional Bank Deposit** |
+| Deposit Amount               | USD 500                     |
+| Updated Account Balance      | USD 540 (USD 40 + USD 500)  |
+
+## Create Invoices And Statements
+
+The **"Create Invoices And Statements"** process is executed at the beginning of each month to generate invoices and statements. To ensure accuracy, the **"Account Balance"** should match the **"Final Balance"** for accurate financial reporting.
+
+<Note>
+Consideration:
+- When running the **"Create Invoices And Statements"** process, only service orders that have been updated to an **"Invoiced"** status within the given month are considered. 
+- This ensures that only the **"relevant service orders"** are included in the invoicing and statement generation.
+</Note>
+
+## Account Balance Calculation for Invoices and Statements
+
+The account balance calculation for **"Create Invoices And Statements"** involves summing the bank **"deposits"** made in the previous month, deducting the **"total invoice amount"** from the previous month, and adding the **"initial balance"**. Follow the steps below to calculate accurate account balance for generating the invoices and statements:
+
+1. Navigate to the **"Create Invoices And Statements"** process.
+2. Verify that only service orders with an **"Invoiced"** status within the current month are considered.
+3. Calculate the account balance using the formula
+
+`Account Balance = Bank Deposits (Previous Month) - Total Invoice (Previous Month) + Initial Balance`
+
+4. Generate the invoices based on the selected service orders and account balance.
+5. Review the invoices for accuracy, ensuring that customer details, item descriptions, and financial values are correct.
+6. Generate the statements using the selected service orders and account balance.
+
+## Displaying Account Balance
+
+The **"Account Balance"** can be displayed prominently in the header of pages for easy reference. It is typically located at the top right of each page, to the left of the account name. The display should include the amount and currency, and the following formatting rules apply:
+
+| Action                             | Account Balance Formatting                                           |
+| ---------------------------------- | -------------------------------------------------------------------- |
+| If the balance is positive         | Display the value in **green**.
+| If the balance is negative or zero | Display the value in **red**.      |
+
+## Negative Account Balance
+
+The process of flagging a **"negative Account Balance"** and handling associated errors refers to the procedures involved in identifying when the Account Balance becomes zero or negative, notifying the user about this condition, and implementing measures to prevent actions that could exceed their credit limit. This includes triggering services, displaying error messages, and removing the flag once a positive Account Balance is achieved. By flagging a negative Account Balance and managing errors effectively, potential issues and risks associated with exceeding credit limits can be mitigated, ensuring smooth operations and financial stability.
+
+### Account Balance Flagging
+
+1. Identify the commands or processes that have the field **"Triggers Services = Yes"**.
+2. Execute the relevant command to check the Account Balance.
+3. If the Account Balance is zero or negative, immediately flag the user to prevent further actions.
+
+<Warning>
+If the commands that initiate the services encounter a negative account balance, an error message will be displayed: `Error: 546 - Credit limit exceeded`.
+</Warning>

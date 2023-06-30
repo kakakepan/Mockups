@@ -1,0 +1,16 @@
+---
+title: "Overview"
+sidebarTitle: "Overview"
+---
+
+Service Orders play a pivotal role in managing paid services and accounting processes within the Superreseller dashboard. By assigning different statuses such as **"In Process"**, **"Cancelled"**, and **"Invoiced"** users can track the progress of their orders and ensure accurate invoicing for executed services. The transparency, accountability, and documentation facilitated by Service Orders contribute to efficient financial management and a seamless user experience.
+
+| Status     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| In Process | The "In Process" status indicates that a Service Order has been created but is not yet active. This status reflects the initial stage of a Service Order, signifying that the necessary steps for providing the paid service are being taken. It serves as an intermediary status during the processing of the order, ensuring transparency in the execution timeline.                                                                                                                      |
+| Cancelled  | When a Service Order is cancelled, it means that the order has been terminated, and no invoice is generated. This status can be applied when a user decides to cancel a paid service order before its completion. Cancelling a Service Order ensures that no further actions are taken, and the associated service will not be processed or invoiced.                                                                                                                                       |
+| Invoiced   | The "Invoiced" status indicates that a Service Order has been successfully completed, and an invoice has been generated. This status is only assigned when a paid service has been executed correctly. For example, when a domain is successfully registered through the "Superreseller" command, the Service Order's status is updated to "Invoiced." Additionally, an "Invoice_Id" and an "Invoice_Date" are assigned to the order, facilitating accurate accounting and record-keeping. |
+
+<Note>Only when a service is properly executed (For example a domain has been registered), the status is updated to **“Invoiced”** and an **“Invoice_Id”** and an **“Invoice_Date”** are assigned.</Note>
+
+To trigger the service order option, you can try to run the register command, for more details please see [here](/commandgroup/domains/register).

@@ -1,0 +1,29 @@
+---
+title: "Delete Lock"
+sidebarTitle: "Delete Lock"
+---
+
+The **"SetDeleteLock"** command is used to set or remove the delete lock on a domain name. The delete lock prevents accidental or unauthorized deletion of the domain. This command ensures the protection of domain names from unintended deletion.
+The command operates as follows:
+
+| Delete Lock Values | Description                                                                                              |
+| -------------------- | -------------------------------------------------------------------------------------------------------- |
+| **"Yes"**            | Sets the delete lock to enabled, preventing the domain from being deleted |
+| **"No"**             | Sets the delete lock to disabled, allowing the reseller to delete the domain if necessary.   |
+
+## Access the Delete Lock Command
+
+To set the Delete Lock for a domain, follow these steps:
+
+1. Navigate to the **"Superreseller dashboard"** [here](https://superreseller-qa.nominus.host/login/?next=/).
+2. Navigate to the [modify form](https://superreseller-qa.nominus.host/forms/domains/modify) for domains.
+3. Select the appropriate reseller from the available options.
+4. Choose the desired domain from the list.
+5. Locate the **"Set Delete Lock"** field in the form.
+6. Set the value to either **"Yes"** or **"No"** based on your requirements.
+
+<Warning>
+**Important things to consider**:
+
+- If Delete Lock is set to **"Yes"** for a **".com"** domain, the other five extensions should also be set to **"Yes"** by default.
+</Warning>

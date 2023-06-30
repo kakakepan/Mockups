@@ -1,0 +1,70 @@
+---
+title: "StatusContact"
+sidebarTitle: "StatusContact"
+---
+
+The `StatusContact` endpoint is an API endpoint used to retrieve the status and information of a contact in a domain registration system. It allows you to check the details of a specific contact associated with a domain registration.
+
+## Parameters
+The following is a parameter for the `StatusContact` endpoint:
+| Parameter Name | Data Type | Description                                     |
+|----------------|-----------|-------------------------------------------------|
+| contact        | String    | The handle ID of the contact to retrieve.          |
+
+## Example Request
+The following is an example request for the `StatusContact` endpoint:
+```curl
+curl -X 'GET' \
+  'https://superreseller-qa.nominus.host/api/v2/contacts/P-TF00001/status' \
+  -H 'accept: application/json' \
+  -H 'X-API-Token: ZvRF6gnqYO7uJiZyEBXxLLZETm2GOjLQ'
+```
+
+## Attributes
+The following is an attribute for the `StatusContact` endpoint:
+| Attribute           | Description                                            |
+|---------------------|--------------------------------------------------------|
+| code                | The response code indicating the result of the command. |
+| description         | A brief description providing more information about the result of the command. |
+| contact             | The detailed information of the requested contact.     |
+| - first_name        | The first name of the contact.                         |
+| - last_name         | The last name of the contact.                          |
+| - organization_name | The name of the organization associated with the contact (or null if not applicable). |
+| - is_organization   | A boolean value indicating whether the contact is an organization. |
+| - email             | The email address of the contact.                      |
+| - country           | The country associated with the contact.               |
+| - address           | The address of the contact.                            |
+| - city              | The city of the contact.                               |
+| - state             | The state or region of the contact.                    |
+| - postal            | The postal code of the contact.                        |
+| - phone_country_code| The country code of the contact's phone number.        |
+| - phone_number      | The phone number of the contact.                       |
+| - fax_country_code  | The country code of the contact's fax number.          |
+| - fax_number        | The fax number of the contact.                         |
+| - internal_contact_id| The internal identifier of the contact.                |
+
+## Example Response
+The following is an example response returned by the `StatusContact` endpoint:
+```json
+{
+  "code": 200,
+  "description": "Command completed successfully",
+  "contact": {
+    "first_name": "Test",
+    "last_name": "First",
+    "organization_name": null,
+    "is_organization": false,
+    "email": "test123@gmail.com",
+    "country": "GTLDLONDON",
+    "address": "123",
+    "city": "London",
+    "state": "London",
+    "postal": "123",
+    "phone_country_code": "",
+    "phone_number": "",
+    "fax_country_code": "",
+    "fax_number": "",
+    "internal_contact_id": "A-A123"
+  }
+}
+```

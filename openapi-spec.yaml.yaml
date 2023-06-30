@@ -1,0 +1,4544 @@
+---
+openapi: 3.0.2
+info:
+  title: SuperReseller API
+  version: 2.0.0
+servers:
+- url: https://superreseller-qa.nominus.host
+security:
+- ApiTokenAuth: []
+tags:
+- name: Domains
+  description: API Endpoints related to domains management
+- name: Contacts
+  description: API Endpoints related to contacts management
+- name: Domains:ModifyDomain
+  description: API Endpoints related to changing of domain information
+- name: Domains:PendingRequests
+  description: API Endpoints for viewing and updating pending domain requests
+- name: Domains:Hosts
+  description: API Endpoints related to domain hosts management
+- name: Requests
+  description: API Endpoints related to command requests
+paths:
+  /api/v2/domains/{domain}/check:
+    get:
+      tags:
+      - Domains
+      description: |-
+        ### Check Domain Availability
+
+        This endpoint provides a command to check if a domain name is available and can be registered at the registry.
+      operationId: listCheckDomains
+      parameters:
+      - name: domain
+        in: path
+        description: Domain name to check for availability
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckDomainResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/status:
+    get:
+      tags:
+      - Domains
+      description: |-
+        ### Check Domain Status
+
+        This endpoint provides a command to check the actual status of a domain in your portfolio.
+
+        By calling this endpoint, users can retrieve important information about a registered domain,
+        including the registration date, registrant details, expiration time, extension that were used to register the domain,
+        and more.
+      operationId: listStatusDomains
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to get details for
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusDomainResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/requests/pending:
+    get:
+      tags:
+      - Domains:PendingRequests
+      description: |-
+        ### Retrieve Pending Additional Information and Documentation for a Domain
+
+        This endpoint provides a command to retrieve information about any pending additional information and documentation for a domain.
+      operationId: listStatusPendingRequests
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to get requirements for
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingRequestsResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/contacts/{contact}/check:
+    get:
+      tags:
+      - Contacts
+      description: |-
+        ### Check Contact Availability
+
+        This endpoint provides a command to check the availability of a domain contact.
+
+        By calling this endpoint, users can determine whether a specific domain contact is available or not.
+      operationId: listCheckContacts
+      parameters:
+      - name: contact
+        in: path
+        description: Handle ID of contact to check
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckContactResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/contacts/{contact}/status:
+    get:
+      tags:
+      - Contacts
+      description: |-
+        ### Check Contact Status
+
+        This endpoint provides a command to view the current status and additional information of a user's contacts.
+
+        By calling this endpoint, users can retrieve various details related to their contacts, such as the contact's name,
+        address, phone number, and email address.
+      operationId: listStatusContacts
+      parameters:
+      - name: contact
+        in: path
+        description: Contact Handle ID to get status for
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusContactResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/hosts/{name}/check:
+    get:
+      tags:
+      - Domains:Hosts
+      description: |-
+        ### Check Host Availability
+
+        This endpoint provides a command to check the availability of a host.
+
+        Users can use this command to check whether a particular hostname is available and can be added to registry.
+      operationId: listCheckHosts
+      parameters:
+      - name: name
+        in: path
+        description: Host name to check
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[\\w\\d\\-\\.]{3,255}"
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckHostResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/hosts/{name}/status:
+    get:
+      tags:
+      - Domains:Hosts
+      description: |-
+        ### Check Host Status
+
+        This endpoint allows you to check the current status of a Host in your portfolio. It provides information such as hostname and IP address.
+      operationId: listStatusHosts
+      parameters:
+      - name: name
+        in: path
+        description: Host name to get status for
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[\\w\\d\\-\\.]{3,255}"
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusHostResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/requests:
+    get:
+      tags:
+      - Requests
+      description: |-
+        ### Retrieve Request Changelog
+
+        This endpoint provides a command to retrieve the changelog of requests made, which includes information such as the request ID, timestamp, and status code.
+      operationId: listRequestLogsFeeds
+      parameters:
+      - name: days
+        in: query
+        description: Display records for last X days selected
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 30
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          - 25
+          - 26
+          - 27
+          - 28
+          - 29
+          - 30
+      - name: object_type
+        in: query
+        description: Show requests related to the given object type
+        required: false
+        style: form
+        explode: true
+        schema:
+          minLength: 1
+          type: string
+          default: All
+          enum:
+          - All
+          - Domain
+          - Contact
+          - Host
+          - Hosting
+      - name: command
+        in: query
+        description: Show requests related to the given command
+        required: false
+        style: form
+        explode: true
+        schema:
+          minLength: 1
+          type: string
+          default: All
+          enum:
+          - All
+          - RegisterDomain
+          - RenewDomain
+          - UpdateDNSserverDomain
+          - TransferInDomain
+          - UpdatePrivateRegistration
+          - UpdateTrusteeService
+          - ChangeOfContacts
+          - SetTransferLock
+          - TransferOutDomain
+          - LateRenewDomain
+          - DeleteDomain
+          - AddFieldsToPendingRequest
+          - AddDocsToPendingRequests
+          - CreateContact
+          - UpdateContact
+          - DeleteContact
+          - SetAutoRenew
+          - SetExpDateForTransfer
+          - CreateHost
+          - ModifyHost
+          - DeleteHost
+          - SetUpdateLock
+          - SetDeleteLock
+          - SetRenewalLock
+          - SetClientHold
+          - UpdateAuthCode
+          - CheckDomain
+          - StatusDomain
+          - StatusPendingRequests
+          - CheckContact
+          - StatusContact
+          - CheckHost
+          - StatusHost
+          - AddHosting
+          - RenewHosting
+          - UpgradeHosting
+          - DowngradeHosting
+          - AddEmailAccounts
+          - RemoveEmailAccounts
+          - SetSuspensionHosting
+          - DeleteHosting
+          - AddProductivitySuite
+          - UpgradeProductivitySuite
+          - DowngradeProductivitySuite
+          - AddAccountsProductivitySuite
+          - RenewProductivitySuite
+          - RemoveAccountsProductivitySuite
+          - SetAutoRenewHosting
+          - StatusHosting
+          - ChangePassword
+          - StatusProductivitySuite
+          - SetupGoogleAdminAccount
+          - AddSSLCert
+          - RenewSSLCert
+          - EnrollSSLCert
+          - StatusSSLCert
+          - ChangeVerificationMethodSSL
+          - ChangeVerificationEmailSSL
+          - DeleteSSLCert
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLogFeedResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/requests/status:
+    get:
+      tags:
+      - Requests
+      description: |-
+        ### Retrieve Request Status
+
+        This endpoint provides a command to retrieve the current status of a specific request.
+      operationId: listRequestStatus
+      parameters:
+      - name: request_id
+        in: query
+        description: Comma-delimited list of Request IDs (up to 100)
+        required: true
+        style: form
+        explode: true
+        schema:
+          minLength: 1
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestStatusResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/register:
+    post:
+      tags:
+      - Domains
+      description: |-
+        ### Register a Domain
+
+        This endpoint allows users to register a domain by performing the following steps:
+
+        1. Check domain availability at the registry.
+        2. Create contact handles in the registry.
+        3. Start domain registration at the registry.
+      operationId: createRegisterDomain
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to register
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDomain'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/register_and_create_contacts:
+    post:
+      tags:
+      - Domains
+      description: |-
+        ### Register a Domain with Contact Creation
+
+        This endpoint facilitates domain registration and contact creation by performing the following steps:
+
+        1. Checks domain availability at the registry.
+        2. Creates new contacts for the reseller (if needed).
+        3. Creates contact handles in the registry.
+        4. Starts domain registration at the registry.
+      operationId: createRegisterDomainAndCreateContacts
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to register
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDomainAndCreateContacts'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/transfer_in:
+    post:
+      tags:
+      - Domains
+      description: |-
+        ### Transfer a Domain
+
+        This endpoint allows users to transfer a domain from another registrar by performing the following steps:
+
+        1. Validate the domain name.
+        2. Create contact handles in the registry.
+        3. Start the transfer process.
+      operationId: createTransferInDomain
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to transfer in
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferInDomainDomain'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/renewals:
+    post:
+      tags:
+      - Domains
+      description: |-
+        ### Renew a Domain Name
+
+        This endpoint provides a command to renew a domain name.
+
+        By calling this endpoint, users can renew their domain name and extend its registration period.
+      operationId: createRenewDomain
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to renew
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenewDomain'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenewDomainResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/requests/fields:
+    post:
+      tags:
+      - Domains:PendingRequests
+      description: |-
+        ### Add Pending Additional Information for a Domain
+
+        This endpoint provides a command to add pending additional information for a domain.
+      operationId: createAddFieldsToPendingRequest
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to add additional information for
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdditionalFieldsRequest'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/requests/documents:
+    post:
+      tags:
+      - Domains:PendingRequests
+      description: |-
+        ### Add Pending Additional Documentation for a Domain
+
+        This endpoint provides a command to add pending additional documentation for a domain.
+      operationId: createAddDocsToPendingRequest
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to add additional documentation for
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdditionalDocumentsRequest'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/contacts:
+    post:
+      tags:
+      - Contacts
+      description: |-
+        ### Create New Contact
+
+        This endpoint provides a command to add a new contact.
+
+        The endpoint automatically generates a new contact handle, which can be used to identify the reseller in the system.
+        Users can specify the contact's information, such as name, address, phone number, and email address,
+        to associate with the new contact handle.
+      operationId: createContact
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestContactCreateResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/hosts/{name}:
+    put:
+      tags:
+      - Domains:Hosts
+      description: |-
+        ### Update Host
+
+        This endpoint provides a command to modify an existing host for a domain.
+
+        Users can update the IP address associated with the host.
+      operationId: updateHost
+      parameters:
+      - name: name
+        in: path
+        description: Name of host to modify
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[\\w\\d\\-\\.]{3,255}"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostIP'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+    post:
+      tags:
+      - Domains:Hosts
+      description: |-
+        ### Create New Host
+
+        This endpoint provides a command to add a new host for a domain.
+
+        Users can specify the name of the new host and the IP address associated with it.
+      operationId: createHost
+      parameters:
+      - name: name
+        in: path
+        description: Host name in format of hostname.domainname.tld
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[\\w\\d\\-\\.]{3,255}$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostIP'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+    delete:
+      tags:
+      - Domains:Hosts
+      description: |-
+        ### Delete Host
+
+        This endpoint provides a command to delete an existing host for a domain.
+      operationId: destroyHost
+      parameters:
+      - name: name
+        in: path
+        description: Name of host to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[\\w\\d\\-\\.]{3,255}"
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/nameservers:
+    put:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Update DNS Servers for Domain Name
+
+        This endpoint provides a command to update the DNS servers for a domain name.
+
+        By calling this endpoint, users can update the servers that are responsible for translating their domain name into an IP address.
+      operationId: updateUpdateDNSServerDomain
+      parameters:
+      - name: domain
+        in: path
+        description: The domain update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDNSServerDomain'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/contacts:
+    put:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Update Contacts for Domain Name
+
+        This endpoint provides a command to update the contacts for a domain name.
+
+        By calling this endpoint, users can update the contact information associated with their domain name,
+        such as the owner, administrative, technical, and billing contacts.
+      operationId: updateChangeOfContacts
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to update contacts
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeOfContacts'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/transfer_lock:
+    patch:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Change Transfer Lock for Domain Name (TLD-dependent)
+
+        This endpoint provides a command to change the Transfer Lock status for a domain name.
+
+        The Transfer Lock status is a setting that can prevent a domain name from being transferred to a different registrar.
+      operationId: partialUpdateSetTransferLock
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to set Transfer Lock Mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetTransferLock'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/update_lock:
+    patch:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Change Update Lock for Domain Name (TLD-dependent)
+
+        This endpoint provides a command to change the Update Lock status for a domain name.
+
+        The Update Lock status is a setting that can prevent a domain name from being updated.
+      operationId: partialUpdateSetUpdateLock
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to set Update Lock Mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUpdateLock'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/delete_lock:
+    patch:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Change Delete Lock for Domain Name (TLD-dependent)
+
+        This endpoint provides a command to change the Delete Lock status for a domain name.
+
+        The Delete Lock status is a setting that can prevent a domain name from being deleted.
+      operationId: partialUpdateSetDeleteLock
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to set Delete Lock Mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetDeleteLock'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/renewal_lock:
+    patch:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Change Renewal Lock for Domain Name (TLD-dependent)
+
+        This endpoint provides a command to change the Renewal Lock status for a domain name.
+
+        The Renewal Lock status is a setting that can prevent a domain name from being renewed.
+      operationId: partialUpdateSetRenewalLock
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to set Renewal Lock Mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetRenewalLock'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/client_hold:
+    patch:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Change Client Hold for Domain Name (TLD-dependent)
+
+        This endpoint provides a command to change the Client Hold status for a domain name.
+
+        Client Hold is a status that can be applied to a domain name, which prevents any changes or updates
+        to the domain name's information, including its DNS records.
+      operationId: partialUpdateSetClientHold
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to set Client Hold Mode
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetClientHold'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/private_registration:
+    patch:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Switch Private Registration for Domain Name (TLD-dependent)
+
+        This endpoint provides a command to switch the Private Registration for a domain name.
+
+        By calling this endpoint, users can change the setting that determines whether their domain name's registration
+        information is publicly visible or not. Enabling Private Registration hides personal information such as the
+        owner's name, address, and phone number from the public WHOIS database.
+      operationId: partialUpdateSetPrivateRegistration
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to update Private Registration
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePrivateRegistration'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/auto_renewal:
+    patch:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Change Auto Renew for Domain Name
+
+        This endpoint provides a command to change the Auto Renew setting for a domain name.
+
+        By calling this endpoint, users can change the setting that determines whether their domain name is automatically renewed before its expiration date.
+      operationId: partialUpdateSetAutoRenew
+      parameters:
+      - name: domain
+        in: path
+        description: ""
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetAutoRenew'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}/auth_code:
+    patch:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Change Authorization Code for Domain Name
+
+        This endpoint provides a command to change the Authorization Code for a domain name.
+
+        By calling this endpoint, users can change the code that is required to authorize certain actions on their domain name, such as transfers or updates.
+      operationId: partialUpdateUpdateAuthCode
+      parameters:
+      - name: domain
+        in: path
+        description: The domain to update Authorization Code
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAuthCode'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/contacts/{contact}:
+    delete:
+      tags:
+      - Contacts
+      description: |-
+        ### Delete Contact
+
+        This endpoint provides a command to delete an existing contact.
+
+        Users can delete the contact handle if there are no active domains assigned to it.
+        If there are any active domains associated with the contact handle, users must first
+        remove them before deleting the contact.
+      operationId: destroyContact
+      parameters:
+      - name: contact
+        in: path
+        description: Handle ID of contact to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+    patch:
+      tags:
+      - Contacts
+      description: |-
+        ### Update Contact
+
+        This endpoint provides a command to update an existing contact.
+
+        Users can modify the contact's information, such as name, address, phone number, and email address.
+
+        The system updates only completed fields while leaving empty ones unchanged.
+      operationId: partialUpdateContact
+      parameters:
+      - name: contact
+        in: path
+        description: Handle ID of contact to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainContact'
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402Response'
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/409Response'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+              example:
+                code: 420
+                description: Command failed due to server error
+  /api/v2/domains/{domain}:
+    delete:
+      tags:
+      - Domains:ModifyDomain
+      description: |-
+        ### Delete a Domain
+
+        This endpoint provides a command to delete a domain.
+
+        By calling this endpoint, users can delete their domain and remove it from the registry.
+      operationId: destroyDeleteDomain
+      parameters:
+      - name: domain
+        in: path
+        description: ""
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Command is processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestResponse'
+        "400":
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: 541
+                description: Invalid attribute value
+        "401":
+          description: 401 Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: 530
+                description: Authentication failed
+        "402":
+          description: 402 Payment Required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: 546
+                description: Credit limit exceeded
+        "404":
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: 545
+                description: Entity reference not found
+        "409":
+          description: 409 Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: 502
+                description: Command cannot be executed for the domain as it is not an active domain
+        "429":
+          description: 429 Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: 547
+                description: API request rate limit exceeded
+        "500":
+          description: 500 Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: 420
+                description: Command failed due to server error
+components:
+  schemas:
+    CheckDomainResponse:
+      required:
+      - code
+      - description
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Availability code
+          example: 210
+          enum:
+          - 210
+          - 211
+        description:
+          type: string
+          description: Description
+          example: Domain Available
+    400Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 541
+        description:
+          type: string
+          description: Error Description
+          example: Invalid attribute value
+    401Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 530
+        description:
+          type: string
+          description: Error Description
+          example: Authentication failed
+    402Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 546
+        description:
+          type: string
+          description: Error Description
+          example: Credit limit exceeded
+    404Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 545
+        description:
+          type: string
+          description: Error Description
+          example: Entity reference not found
+    409Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 502
+        description:
+          type: string
+          description: Error Description
+          example: Command cannot be executed for the domain as it is not an
+              active domain
+    429Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 547
+        description:
+          type: string
+          description: Error Description
+          example: API request rate limit exceeded
+    500Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 420
+        description:
+          type: string
+          description: Error Description
+          example: Command failed due to server error
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+        description:
+          type: string
+          description: Error Description
+    StatusDomainResponse:
+      required:
+      - code
+      - description
+      - domain
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+        domain:
+          $ref: '#/components/schemas/StatusDomainResponse_domain'
+    PendingRequestsResponse:
+      required:
+      - code
+      - description
+      - pending_requirements
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+        pending_requirements:
+          $ref: '#/components/schemas/PendingRequestsResponse_pending_requirements'
+    CheckContactResponse:
+      required:
+      - code
+      - description
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Availability code
+          example: 214
+          enum:
+          - 215
+          - 214
+        description:
+          type: string
+          description: Description
+          example: Contact not available
+    StatusContactResponse:
+      required:
+      - code
+      - contact
+      - description
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+        contact:
+          $ref: '#/components/schemas/StatusContactResponse_contact'
+    CheckHostResponse:
+      required:
+      - code
+      - description
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Availability code
+          example: 212
+          enum:
+          - 212
+          - 213
+        description:
+          type: string
+          description: Description
+          example: Host name available
+    StatusHostResponse:
+      required:
+      - code
+      - description
+      - host
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+        host:
+          $ref: '#/components/schemas/StatusHostResponse_host'
+    RequestLogFeedResponse:
+      required:
+      - code
+      - description
+      - requests
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestLogFeedResponse_requests'
+    RequestStatusResponse:
+      required:
+      - code
+      - description
+      - requests
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestStatusResponse_requests'
+    RegisterDomain:
+      required:
+      - accept_trustee
+      - add_private_registration
+      - auth_code
+      - nameservers
+      - owner_contact
+      - use_superreseller_dns
+      - years_of_registration
+      type: object
+      properties:
+        auth_code:
+          type: string
+          description: Auth code if required for extension (Optional)
+          example: '@2934/!1143'
+        owner_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Owner Contact (Required)
+          example: O-CO00001
+        admin_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Admin Contact (Optional)
+          example: O-CO00001
+        tech_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Tech Contact (Optional)
+          example: O-CO00001
+        billing_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Billing Contact (Optional)
+          example: O-CO00001
+        nameservers:
+          type: array
+          description: DNS Records
+          items:
+            $ref: '#/components/schemas/StatusDomainResponse_domain_nameservers'
+        use_superreseller_dns:
+          type: boolean
+          description: Use SuperReseller DNS servers
+        years_of_registration:
+          type: integer
+          description: Years of Registration
+          example: 1
+        accept_trustee:
+          type: boolean
+          description: Accept Trustee Service
+        add_private_registration:
+          type: boolean
+          description: Accept Private Registration Service
+    RequestResponse:
+      required:
+      - code
+      - description
+      - request_id
+      - request_status
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+        request_status:
+          type: string
+          description: Request Status
+          example: Successful
+          enum:
+          - In Process
+          - Pending
+          - Successful
+          - Cancelled
+          - Cancelled by RSS
+          - Reversed
+          - Reversed by RSS
+          - Pending - Missing Exp Date
+          - Process in Real-Time
+          - Cancelled in Real-Time
+        request_id:
+          type: integer
+          description: Request ID
+          example: 42
+    RegisterDomainAndCreateContacts:
+      required:
+      - accept_trustee
+      - add_private_registration
+      - admin_contact
+      - auth_code
+      - billing_contact
+      - nameservers
+      - owner_contact
+      - tech_contact
+      - use_superreseller_dns
+      - years_of_registration
+      type: object
+      properties:
+        auth_code:
+          type: string
+          description: Auth code if required for extension (Optional)
+          example: '@2934/!1143'
+        owner_contact:
+          $ref: '#/components/schemas/RegisterDomainAndCreateContacts_owner_contact'
+        admin_contact:
+          $ref: '#/components/schemas/RegisterDomainAndCreateContacts_admin_contact'
+        tech_contact:
+          $ref: '#/components/schemas/RegisterDomainAndCreateContacts_tech_contact'
+        billing_contact:
+          $ref: '#/components/schemas/RegisterDomainAndCreateContacts_billing_contact'
+        nameservers:
+          type: array
+          description: DNS Records
+          items:
+            $ref: '#/components/schemas/StatusDomainResponse_domain_nameservers'
+        use_superreseller_dns:
+          type: boolean
+          description: Use SuperReseller DNS servers
+        years_of_registration:
+          type: integer
+          description: Years of Registration
+          example: 1
+        accept_trustee:
+          type: boolean
+          description: Accept Trustee Service
+        add_private_registration:
+          type: boolean
+          description: Accept Private Registration Service
+    TransferInDomainDomain:
+      required:
+      - accept_trustee
+      - auth_code
+      - nameservers
+      - owner_contact
+      - use_superreseller_dns
+      type: object
+      properties:
+        auth_code:
+          type: string
+          description: Auth code if required for extension (Optional)
+          example: '@2934/!1143'
+        owner_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Owner Contact (Required)
+          example: O-CO00001
+        admin_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Admin Contact (Optional)
+          example: O-CO00001
+        tech_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Tech Contact (Optional)
+          example: O-CO00001
+        billing_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Billing Contact (Optional)
+          example: O-CO00001
+        nameservers:
+          type: array
+          description: DNS Records
+          items:
+            $ref: '#/components/schemas/StatusDomainResponse_domain_nameservers'
+        use_superreseller_dns:
+          type: boolean
+          description: Use SuperReseller DNS servers
+        accept_trustee:
+          type: boolean
+          description: Accept Trustee Service
+        additional_fields:
+          $ref: '#/components/schemas/TransferInDomainDomain_additional_fields'
+    RenewDomain:
+      required:
+      - number_of_years
+      type: object
+      properties:
+        number_of_years:
+          pattern: "^\\d{1,2}$"
+          type: integer
+          description: Number of years to renew domain (Required)
+          example: 1
+        accept_late_renewal_fee:
+          type: boolean
+          description: Consent to accept late renewal fee if applicable
+    RenewDomainResponse:
+      required:
+      - code
+      - description
+      - expiration_date
+      - request_id
+      - request_status
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+        request_status:
+          type: string
+          description: Request Status
+          example: Successful
+          enum:
+          - In Process
+          - Pending
+          - Successful
+          - Cancelled
+          - Cancelled by RSS
+          - Reversed
+          - Reversed by RSS
+          - Pending - Missing Exp Date
+          - Process in Real-Time
+          - Cancelled in Real-Time
+        request_id:
+          type: integer
+          description: Request ID
+          example: 42
+        expiration_date:
+          type: string
+          description: New expiration date
+          example: 2025-01-01
+    AdditionalFieldsRequest:
+      required:
+      - fields
+      type: object
+      properties:
+        cancel:
+          type: boolean
+          description: Consent to cancel both current request and related domain request
+          default: false
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdditionalFieldsRequest_fields'
+    BaseResponse:
+      required:
+      - code
+      - description
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+    AdditionalDocumentsRequest:
+      required:
+      - documents
+      type: object
+      properties:
+        cancel:
+          type: boolean
+          description: Consent to cancel both current request and related domain request
+          default: false
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdditionalDocumentsRequest_documents'
+    ContactCreate:
+      required:
+      - address
+      - city
+      - country
+      - email
+      - fax_country_code
+      - fax_number
+      - first_name
+      - internal_contact_id
+      - is_organization
+      - last_name
+      - organization_name
+      - phone_country_code
+      - phone_number
+      - postal
+      - state
+      type: object
+      properties:
+        internal_contact_id:
+          pattern: "^[\\w\\d\\-\\.]{1,20}$"
+          type: string
+          description: Internal contact ID (Required)
+          example: "287"
+        first_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: First Name (Required)
+          example: Will
+        last_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Last Name (Required)
+          example: Knott
+        organization_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Organization Name (Optional)
+          example: Company Ltd.
+        is_organization:
+          type: boolean
+          description: Is Organization
+        email:
+          pattern: "^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,16}$"
+          type: string
+          description: Email (Optional)
+          format: email
+          example: dontreply@dontreply.com
+        country:
+          pattern: "^[A-Za-z\\-]{2,30}$"
+          type: string
+          description: Country ISO Code (Optional)
+          example: US
+        address:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Address (Optional)
+          example: "1, Main st."
+        city:
+          pattern: "^.{2,180}$"
+          type: string
+          description: City (Optional)
+          example: Springfield
+        state:
+          pattern: "^.{2,180}$"
+          type: string
+          description: State (Optional)
+          example: CO
+        postal:
+          pattern: "^.{0,30}$"
+          type: string
+          description: Postal Code (Optional)
+          example: "81073"
+        phone_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Phone country code (Optional)
+          example: "1"
+        phone_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Phone Number (Optional)
+          example: (111)1111111
+        fax_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Fax country code (Optional)
+          example: "1"
+        fax_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Fax number (Optional)
+          example: (111)1111111
+    RequestContactCreateResponse:
+      required:
+      - code
+      - description
+      - handle_id
+      - request_id
+      - request_status
+      type: object
+      properties:
+        code:
+          type: integer
+          description: API Return Code
+          example: 200
+        description:
+          type: string
+          description: Status Message
+          example: Command completed successfully
+        request_status:
+          type: string
+          description: Request Status
+          example: Successful
+          enum:
+          - In Process
+          - Pending
+          - Successful
+          - Cancelled
+          - Cancelled by RSS
+          - Reversed
+          - Reversed by RSS
+          - Pending - Missing Exp Date
+          - Process in Real-Time
+          - Cancelled in Real-Time
+        request_id:
+          type: integer
+          description: Request ID
+          example: 42
+        handle_id:
+          type: string
+          description: Contact Handle ID
+          example: O-CO00001
+    HostIP:
+      required:
+      - ip
+      type: object
+      properties:
+        ip:
+          pattern: "^((^\\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\\s*$)|(^\\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:)))(%.+)?\\s*$))$"
+          type: string
+          description: Host IP Address (Required)
+          example: 192.168.1.1
+    UpdateDNSServerDomain:
+      required:
+      - nameservers
+      type: object
+      properties:
+        nameservers:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusDomainResponse_domain_nameservers'
+        use_superreseller_dns:
+          type: boolean
+          description: Whether to use superreseller DNS servers
+    ChangeOfContacts:
+      required:
+      - owner_contact
+      type: object
+      properties:
+        owner_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Owner Contact (Required)
+          example: O-OW00001
+        admin_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Admin Contact (Optional)
+          example: O-AD00001
+        tech_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Tech Contact (Optional)
+          example: O-TE00001
+        billing_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Billing Contact (Optional)
+          example: O-BI00001
+        accept_trustee:
+          type: boolean
+          description: Consent to trustee service if required for extension
+        accept_owner_update_fee:
+          type: boolean
+          description: Consent to owner change fee
+        sixty_day_lock_optout:
+          type: boolean
+          description: Consent for 60 day lock opt-out
+          default: false
+    SetTransferLock:
+      required:
+      - transfer_lock
+      type: object
+      properties:
+        transfer_lock:
+          type: boolean
+    SetUpdateLock:
+      required:
+      - update_lock
+      type: object
+      properties:
+        update_lock:
+          type: boolean
+    SetDeleteLock:
+      required:
+      - delete_lock
+      type: object
+      properties:
+        delete_lock:
+          type: boolean
+    SetRenewalLock:
+      required:
+      - renewal_lock
+      type: object
+      properties:
+        renewal_lock:
+          type: boolean
+    SetClientHold:
+      required:
+      - client_hold
+      type: object
+      properties:
+        client_hold:
+          type: boolean
+    UpdatePrivateRegistration:
+      required:
+      - private_registration
+      type: object
+      properties:
+        private_registration:
+          type: boolean
+    SetAutoRenew:
+      required:
+      - auto_renew
+      type: object
+      properties:
+        auto_renew:
+          type: boolean
+    UpdateAuthCode:
+      required:
+      - auth_code
+      type: object
+      properties:
+        auth_code:
+          type: string
+          description: Valid Auth Code (Required)
+          example: "D/6s}WMH8TTJ"
+    DomainContact:
+      required:
+      - address
+      - city
+      - country
+      - email
+      - fax_country_code
+      - fax_number
+      - first_name
+      - internal_contact_id
+      - is_organization
+      - last_name
+      - organization_name
+      - phone_country_code
+      - phone_number
+      - postal
+      - state
+      type: object
+      properties:
+        first_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: First Name (Required)
+          example: Will
+        last_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Last Name (Required)
+          example: Knott
+        organization_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Organization Name (Optional)
+          example: Company Ltd.
+        is_organization:
+          type: boolean
+          description: Is Organization
+        email:
+          pattern: "^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,16}$"
+          type: string
+          description: Email (Optional)
+          format: email
+          example: dontreply@dontreply.com
+        country:
+          pattern: "^[A-Za-z\\-]{2,30}$"
+          type: string
+          description: Country ISO Code (Optional)
+          example: US
+        address:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Address (Optional)
+          example: "1, Main st."
+        city:
+          pattern: "^.{2,180}$"
+          type: string
+          description: City (Optional)
+          example: Springfield
+        state:
+          pattern: "^.{2,180}$"
+          type: string
+          description: State (Optional)
+          example: CO
+        postal:
+          pattern: "^.{0,30}$"
+          type: string
+          description: Postal Code (Optional)
+          example: "81073"
+        phone_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Phone country code (Optional)
+          example: "1"
+        phone_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Phone Number (Optional)
+          example: (111)1111111
+        fax_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Fax country code (Optional)
+          example: "1"
+        fax_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Fax number (Optional)
+          example: (111)1111111
+        internal_contact_id:
+          pattern: "^[\\w\\d\\-\\.]{1,20}$"
+          type: string
+          description: Internal contact ID (Required)
+          example: "287"
+    StatusDomainResponse_domain_nameservers:
+      required:
+      - ip
+      - name
+      type: object
+      properties:
+        name:
+          pattern: "^[\\w\\d\\-\\.]{3,255}$"
+          type: string
+          description: DNS Server Name (Optional)
+          example: ns01.dnsserver.tld
+        ip:
+          pattern: "^[\\w\\d\\-\\.]{3,255}$"
+          type: string
+          description: DNS Server Name (Optional)
+          example: 192.168.1.1
+    StatusDomainResponse_domain:
+      required:
+      - auth_code
+      - auto_renewal
+      - domain
+      - expiration_date
+      - nameservers
+      - owner_contact
+      - private_registration
+      - registration_date
+      - status
+      - transfer_lock
+      - trustee
+      - zone
+      type: object
+      properties:
+        domain:
+          type: string
+          description: The domain to register (Required)
+          example: example.com
+        zone:
+          type: string
+          description: TLD
+          example: com
+        status:
+          type: string
+          description: Domain Status
+          enum:
+          - In Process
+          - Registered
+          - Soon to Expire
+          - Expired - Recoverable
+          - Expired
+          - Disabled
+          - Cancelled by RSS
+          - Archived
+          - Reversed by RSS
+        registration_date:
+          type: string
+          description: Registration Date
+          format: date
+          example: 2023-01-01
+        expiration_date:
+          type: string
+          description: Expiration Date
+          format: date
+          example: 2024-01-01
+        auto_renewal:
+          type: boolean
+          description: Is auto-renewal enabled
+        transfer_lock:
+          type: boolean
+          description: Is transfer lock enabled
+        auth_code:
+          type: string
+          description: Auth code if required for extension (Optional)
+          example: '@2934/!1143'
+        owner_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Owner Contact (Required)
+          example: O-CO00001
+        admin_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Admin Contact (Optional)
+          example: O-CO00001
+        tech_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Tech Contact (Optional)
+          example: O-CO00001
+        billing_contact:
+          pattern: "^(O|P)-[A-Z]{2}\\d{5}$"
+          type: string
+          description: Handle ID for Billing Contact (Optional)
+          example: O-CO00001
+        nameservers:
+          type: array
+          description: DNS Records
+          items:
+            $ref: '#/components/schemas/StatusDomainResponse_domain_nameservers'
+        trustee:
+          type: boolean
+          description: Is trustee service enabled
+        private_registration:
+          type: boolean
+          description: Is private registration serivce enabled
+      description: Domain data
+    PendingRequestsResponse_pending_requirements_fields:
+      required:
+      - description
+      - field_id
+      - name
+      - type
+      - validation_regular_expression
+      type: object
+      properties:
+        field_id:
+          type: string
+          description: Field ID
+          example: CompanyNumber
+        name:
+          type: string
+          description: Field Name
+          example: 'CNPJ:'
+        type:
+          type: string
+          description: Field Type
+          example: Company Number
+        description:
+          type: string
+          description: Field Descripiton
+          example: Company Number
+        validation_regular_expression:
+          type: string
+          description: Validation Regular Expression
+          example: "^.{2,180}$"
+    PendingRequestsResponse_pending_requirements_documents:
+      required:
+      - description
+      - download_url
+      - field_id
+      type: object
+      properties:
+        field_id:
+          type: string
+          description: Field ID
+          example: document_url0
+        description:
+          type: string
+          description: Document Description
+        download_url:
+          type: string
+          description: URL to download document
+          example: https://download.from/that.link
+    PendingRequestsResponse_pending_requirements:
+      required:
+      - command
+      - domain_name
+      - domain_request_status
+      type: object
+      properties:
+        domain_name:
+          type: string
+          description: Domain Name
+          example: domain.tld
+        command:
+          type: string
+          description: Command
+          example: RegisterDomain
+        domain_request_status:
+          type: string
+          description: Domain Request Status
+          example: Pending
+        fields:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/PendingRequestsResponse_pending_requirements_fields'
+        documents:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/PendingRequestsResponse_pending_requirements_documents'
+    StatusContactResponse_contact:
+      required:
+      - address
+      - city
+      - country
+      - email
+      - fax_country_code
+      - fax_number
+      - first_name
+      - internal_contact_id
+      - is_organization
+      - last_name
+      - organization_name
+      - phone_country_code
+      - phone_number
+      - postal
+      - state
+      type: object
+      properties:
+        first_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: First Name (Required)
+          example: Will
+        last_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Last Name (Required)
+          example: Knott
+        organization_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Organization Name (Optional)
+          example: Company Ltd.
+        is_organization:
+          type: boolean
+          description: Is Organization
+        email:
+          pattern: "^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,16}$"
+          type: string
+          description: Email (Optional)
+          format: email
+          example: dontreply@dontreply.com
+        country:
+          pattern: "^[A-Za-z\\-]{2,30}$"
+          type: string
+          description: Country ISO Code (Optional)
+          example: US
+        address:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Address (Optional)
+          example: "1, Main st."
+        city:
+          pattern: "^.{2,180}$"
+          type: string
+          description: City (Optional)
+          example: Springfield
+        state:
+          pattern: "^.{2,180}$"
+          type: string
+          description: State (Optional)
+          example: CO
+        postal:
+          pattern: "^.{0,30}$"
+          type: string
+          description: Postal Code (Optional)
+          example: "81073"
+        phone_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Phone country code (Optional)
+          example: "1"
+        phone_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Phone Number (Optional)
+          example: (111)1111111
+        fax_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Fax country code (Optional)
+          example: "1"
+        fax_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Fax number (Optional)
+          example: (111)1111111
+        internal_contact_id:
+          pattern: "^[\\w\\d\\-\\.]{1,20}$"
+          type: string
+          description: Internal contact ID (Required)
+          example: "287"
+      description: Contact data
+    StatusHostResponse_host:
+      required:
+      - ip
+      - name
+      - status
+      type: object
+      properties:
+        name:
+          type: string
+          description: Host Name
+          example: hostname.domain.tld
+        ip:
+          type: string
+          description: Host IP Address
+          example: 192.168.1.1
+        status:
+          type: string
+          description: Host Status
+          enum:
+          - In Process
+          - Active
+          - Disabled
+          - Cancelled by RSS
+          - Reversed by RSS
+      description: Host data
+    RequestLogFeedResponse_requests:
+      required:
+      - command
+      - expiration_date
+      - id
+      - object
+      - object_type
+      - request_id
+      - timestamp
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Log ID
+          example: 1221
+        request_id:
+          type: integer
+          description: Request ID
+          example: 512
+        object_type:
+          type: string
+          description: Object Type
+          example: Domain
+        object:
+          type: string
+          description: Request Object
+          example: domain.tld
+        status:
+          type: string
+          description: Request Status
+          readOnly: true
+          example: Successful
+        command:
+          type: string
+          description: Request Command
+          example: RegisterDomain
+        timestamp:
+          type: string
+          format: date-time
+        expiration_date:
+          type: string
+          format: date
+    RequestStatusResponse_requests:
+      required:
+      - request_id
+      type: object
+      properties:
+        request_id:
+          type: integer
+          description: Request ID
+          example: 512
+        status:
+          type: string
+          description: Request Status
+          readOnly: true
+          example: Successful
+    RegisterDomainAndCreateContacts_owner_contact:
+      required:
+      - address
+      - city
+      - country
+      - email
+      - fax_country_code
+      - fax_number
+      - first_name
+      - internal_contact_id
+      - is_organization
+      - last_name
+      - organization_name
+      - phone_country_code
+      - phone_number
+      - postal
+      - state
+      type: object
+      properties:
+        internal_contact_id:
+          pattern: "^[\\w\\d\\-\\.]{1,20}$"
+          type: string
+          description: Internal contact ID (Required)
+          example: "287"
+        first_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: First Name (Required)
+          example: Will
+        last_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Last Name (Required)
+          example: Knott
+        organization_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Organization Name (Optional)
+          example: Company Ltd.
+        is_organization:
+          type: boolean
+          description: Is Organization
+        email:
+          pattern: "^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,16}$"
+          type: string
+          description: Email (Optional)
+          format: email
+          example: dontreply@dontreply.com
+        country:
+          pattern: "^[A-Za-z\\-]{2,30}$"
+          type: string
+          description: Country ISO Code (Optional)
+          example: US
+        address:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Address (Optional)
+          example: "1, Main st."
+        city:
+          pattern: "^.{2,180}$"
+          type: string
+          description: City (Optional)
+          example: Springfield
+        state:
+          pattern: "^.{2,180}$"
+          type: string
+          description: State (Optional)
+          example: CO
+        postal:
+          pattern: "^.{0,30}$"
+          type: string
+          description: Postal Code (Optional)
+          example: "81073"
+        phone_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Phone country code (Optional)
+          example: "1"
+        phone_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Phone Number (Optional)
+          example: (111)1111111
+        fax_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Fax country code (Optional)
+          example: "1"
+        fax_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Fax number (Optional)
+          example: (111)1111111
+      description: Owner Contact Data
+    RegisterDomainAndCreateContacts_admin_contact:
+      required:
+      - address
+      - city
+      - country
+      - email
+      - fax_country_code
+      - fax_number
+      - first_name
+      - internal_contact_id
+      - is_organization
+      - last_name
+      - organization_name
+      - phone_country_code
+      - phone_number
+      - postal
+      - state
+      type: object
+      properties:
+        internal_contact_id:
+          pattern: "^[\\w\\d\\-\\.]{1,20}$"
+          type: string
+          description: Internal contact ID (Required)
+          example: "287"
+        first_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: First Name (Required)
+          example: Will
+        last_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Last Name (Required)
+          example: Knott
+        organization_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Organization Name (Optional)
+          example: Company Ltd.
+        is_organization:
+          type: boolean
+          description: Is Organization
+        email:
+          pattern: "^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,16}$"
+          type: string
+          description: Email (Optional)
+          format: email
+          example: dontreply@dontreply.com
+        country:
+          pattern: "^[A-Za-z\\-]{2,30}$"
+          type: string
+          description: Country ISO Code (Optional)
+          example: US
+        address:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Address (Optional)
+          example: "1, Main st."
+        city:
+          pattern: "^.{2,180}$"
+          type: string
+          description: City (Optional)
+          example: Springfield
+        state:
+          pattern: "^.{2,180}$"
+          type: string
+          description: State (Optional)
+          example: CO
+        postal:
+          pattern: "^.{0,30}$"
+          type: string
+          description: Postal Code (Optional)
+          example: "81073"
+        phone_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Phone country code (Optional)
+          example: "1"
+        phone_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Phone Number (Optional)
+          example: (111)1111111
+        fax_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Fax country code (Optional)
+          example: "1"
+        fax_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Fax number (Optional)
+          example: (111)1111111
+      description: Admin Contact Data
+    RegisterDomainAndCreateContacts_tech_contact:
+      required:
+      - address
+      - city
+      - country
+      - email
+      - fax_country_code
+      - fax_number
+      - first_name
+      - internal_contact_id
+      - is_organization
+      - last_name
+      - organization_name
+      - phone_country_code
+      - phone_number
+      - postal
+      - state
+      type: object
+      properties:
+        internal_contact_id:
+          pattern: "^[\\w\\d\\-\\.]{1,20}$"
+          type: string
+          description: Internal contact ID (Required)
+          example: "287"
+        first_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: First Name (Required)
+          example: Will
+        last_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Last Name (Required)
+          example: Knott
+        organization_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Organization Name (Optional)
+          example: Company Ltd.
+        is_organization:
+          type: boolean
+          description: Is Organization
+        email:
+          pattern: "^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,16}$"
+          type: string
+          description: Email (Optional)
+          format: email
+          example: dontreply@dontreply.com
+        country:
+          pattern: "^[A-Za-z\\-]{2,30}$"
+          type: string
+          description: Country ISO Code (Optional)
+          example: US
+        address:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Address (Optional)
+          example: "1, Main st."
+        city:
+          pattern: "^.{2,180}$"
+          type: string
+          description: City (Optional)
+          example: Springfield
+        state:
+          pattern: "^.{2,180}$"
+          type: string
+          description: State (Optional)
+          example: CO
+        postal:
+          pattern: "^.{0,30}$"
+          type: string
+          description: Postal Code (Optional)
+          example: "81073"
+        phone_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Phone country code (Optional)
+          example: "1"
+        phone_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Phone Number (Optional)
+          example: (111)1111111
+        fax_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Fax country code (Optional)
+          example: "1"
+        fax_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Fax number (Optional)
+          example: (111)1111111
+      description: Tech Contact Data
+    RegisterDomainAndCreateContacts_billing_contact:
+      required:
+      - address
+      - city
+      - country
+      - email
+      - fax_country_code
+      - fax_number
+      - first_name
+      - internal_contact_id
+      - is_organization
+      - last_name
+      - organization_name
+      - phone_country_code
+      - phone_number
+      - postal
+      - state
+      type: object
+      properties:
+        internal_contact_id:
+          pattern: "^[\\w\\d\\-\\.]{1,20}$"
+          type: string
+          description: Internal contact ID (Required)
+          example: "287"
+        first_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: First Name (Required)
+          example: Will
+        last_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Last Name (Required)
+          example: Knott
+        organization_name:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Organization Name (Optional)
+          example: Company Ltd.
+        is_organization:
+          type: boolean
+          description: Is Organization
+        email:
+          pattern: "^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,16}$"
+          type: string
+          description: Email (Optional)
+          format: email
+          example: dontreply@dontreply.com
+        country:
+          pattern: "^[A-Za-z\\-]{2,30}$"
+          type: string
+          description: Country ISO Code (Optional)
+          example: US
+        address:
+          pattern: "^.{2,180}$"
+          type: string
+          description: Address (Optional)
+          example: "1, Main st."
+        city:
+          pattern: "^.{2,180}$"
+          type: string
+          description: City (Optional)
+          example: Springfield
+        state:
+          pattern: "^.{2,180}$"
+          type: string
+          description: State (Optional)
+          example: CO
+        postal:
+          pattern: "^.{0,30}$"
+          type: string
+          description: Postal Code (Optional)
+          example: "81073"
+        phone_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Phone country code (Optional)
+          example: "1"
+        phone_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Phone Number (Optional)
+          example: (111)1111111
+        fax_country_code:
+          pattern: "^\\d{,3}$"
+          type: string
+          description: Fax country code (Optional)
+          example: "1"
+        fax_number:
+          pattern: "^.{4,30}$"
+          type: string
+          description: Fax number (Optional)
+          example: (111)1111111
+      description: Billing Contact Data
+    TransferInDomainDomain_additional_fields:
+      required:
+      - AuthCode
+      type: object
+      properties:
+        AuthCode:
+          type: string
+          description: Auth Code for Transfer
+          example: "D/6s}WMH8TTJ"
+      description: Optional Additional fields which can be provided immediately
+    AdditionalFieldsRequest_fields:
+      required:
+      - field_id
+      - value
+      type: object
+      properties:
+        field_id:
+          type: string
+          description: Field ID
+          example: CompanyNumber
+        value:
+          type: string
+          description: Field Value
+          example: "31415"
+    AdditionalDocumentsRequest_documents:
+      required:
+      - field_id
+      - value
+      type: object
+      properties:
+        field_id:
+          type: string
+          description: Field ID
+          example: document_url0
+        value:
+          type: string
+          description: Field Value
+          example: https://document.url
+  responses:
+    Response400:
+      description: 400 Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 541
+            description: Invalid attribute value
+    Response401:
+      description: 401 Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 530
+            description: Authentication failed
+    Response402:
+      description: 402 Payment Required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 546
+            description: Credit limit exceeded
+    Response404:
+      description: 404 Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 545
+            description: Entity reference not found
+    Response409:
+      description: 409 Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 502
+            description: Command cannot be executed for the domain as it is not an active domain
+    Response429:
+      description: 429 Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 547
+            description: API request rate limit exceeded
+    Response500:
+      description: 500 Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 420
+            description: Command failed due to server error
+  securitySchemes:
+    ApiTokenAuth:
+      type: apiKey
+      description: API Token
+      name: X-API-Token
+      in: header

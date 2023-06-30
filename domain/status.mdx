@@ -1,0 +1,100 @@
+---
+title: "Domain Status"
+sidebarTitle: "Domain Status"
+---
+
+The **"Domain Status"** feature enhances the management of domain portfolio statuses.
+
+## Access Domain Status
+
+1. Navigate to the **"Price & Settings"** tab.
+2. Click on the **"Domain Status"** page.
+3. The **"Domain Status"** page will display all domain portfolio statuses in the form of the following table:
+
+   | Domain_Status_Id | Status Category       | Explanation | Description                                                                                                             |
+   | :--------------- | :-------------------- | :---------- | :---------------------------------------------------------------------------------------------------------------------- |
+   | 1                | In Process            | Inactive    | Domain portfolio has been created, it is not active yet. This is the default status.                                    |
+   | 2                | Registered            | Active      | Domain is registered                                                                                                    |
+   | 3                | Soon to Expire        | Active      | Domain will soon expire. The button "Renew" appears to client.                                                          |
+   | 4                | Expired - Recoverable | Inactive    | The Domain has expired, but it is recoverable by ordering a "Renew" with "Late Renew". The button "Late Renew" appears. |
+   | 5                | Expired               | Inactive    | The Domain has expired and cannot be recovered                                                                          |
+   | 6                | Disabled              | Disabled    | The Domain should disappear from "Domains".                                                                             |
+   | 7                | Cancelled by RSS      | Disabled    | This status is automatically updated when the order for creating a portfolio is "Cancelled" by Webhook                  |
+   | 8                | Archived              | Disabled    | This status is automatically updated when user request to "Archive" a domain                                            |
+   | 9                | Reversed by RSS       | Disabled    | This status is automatically updated when the order for creating a portfolio is "Reversed" by Webhook.                  |
+
+## Active Domains
+
+The **"Active Domains"** feature displays only the domains that have **“Status Category = Active”**.
+
+### Access Active Domains
+
+1. Within the **“Portfolio”** Tab. 
+2. Click on the "**Active"** option under the domain portfolio, which provides information such as the following:
+
+| Parameter       | Description                                         |
+| :-------------- | :-------------------------------------------------- |
+| Domain Name     | The name of the domain.                             |
+| Status          | The status of the domain.                           |
+| Expiration Date | The expiration date of the domain.                  |
+| Transfer Lock   | The domain configuration of the transfer lock       |
+| Auto Renew      | The domain's configuration to automatically renews. |
+| Provider Hold   | Set by the domain registrar or hosting provider on a domain name, restricting certain actions associated with the domain.                                        |
+| Client Hold     | Set by a domain registrar on a domain name, restricting certain actions associated with the domain at the request of the owner or due to specific circumstances. |
+
+3. For example, below is a table summarizing the **"Active domains"**:
+
+| Domain Name | Status         | Expiration Date | Transfer Lock | Auto Renew | Provider Hold | Client Hold |
+| ----------- | -------------- | --------------- | ------------- | ---------- | ------------- | ----------- |
+| example.com | Soon to Expire | 2023-12-31      | Enabled       | Enabled    | No            | No          |
+| test.org    | Registered     | 2025-06-25      | Disabled      | Disabled   | No            | Yes         |
+| sample.net  | Registered     | 2027-09-21      | Enabled       | Enabled    | Yes           | No          |
+| demo.io     | Soon to Expire | 2024-09-26      | Disabled      | Enabled    | No            | No          |
+
+## Inactive Domains
+
+The **"Inactive Domains"** option will display only the domains with the **"Status Category"** set to **"Inactive"**.
+
+### Access Inactive Domains
+
+1. Within the **“Portfolio”** Tab. 
+2. Click on the "**Inactive"** option under the domain portfolio, which provides information such as the following:
+
+| Parameter          | Description                               |
+| :----------------- | :---------------------------------------- |
+| Domain Name        | The name of the domain.                   |
+| Status             | The status of the domain.                 |
+| Expiration Date    | The expiration date of the domain.        |
+| Inactive From Date | The inactive date of the inactive domain. |
+
+3. For example, below is a table summarizing the **"Inactive domains"**:
+
+| Domain Name | Status                | Expiration Date | Inactive From Date |
+| ----------- | --------------------- | --------------- | ------------------ |
+| example.com | In Process            | 2022-12-31      | 2022-11-01         |
+| test.org    | Expired               | 2023-06-15      | 2023-05-01         |
+| sample.net  | Expired - Recoverable | 2022-09-20      | 2022-08-15         |
+
+## Disabled Domains
+
+The **"Disabled Domains"** page will display only the domains with the **"Status Category"** set to **"Disabled"**.
+
+### Access Disabled Domains.
+
+1. Within the **“Portfolio”** Tab. 
+2. Click on the **"Disabled"** option under the domain portfolio, which provides information such as the following: 
+
+| Parameter          | Description                                                                                                                                                      |
+| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Domain Name        | A domain name is a unique alphanumeric identifier representing a website on the internet.                                                                        |
+| Status             | The status of a domain refers to its current state or condition.                                                                                                 |
+| Disabled From Date | The **"Disabled from Date"** refers to the date on which a particular feature, service, or functionality related to a domain was disabled or became unavailable. |
+| Expired            | When a domain reaches its expiration date and is not renewed, it becomes "expired." An expired domain is no longer active or accessible on the internet.         |
+
+3. For example, below is a table summarizing the **"Disabled domains"**:
+
+| Domain Name | Status           | Disabled From Date | Expired |
+| ----------- | ---------------- | ------------------ | ------- |
+| example.com | Cancelled by RSS | 2022-11-01         | No      |
+| test.org    | Archived         | 2023-05-01         | No      |
+| sample.net  | Reversed by RSS  | 2023-02-04         | No      |

@@ -1,0 +1,49 @@
+---
+title: "DeleteContact"
+sidebarTitle: "DeleteContact"
+---
+
+
+The `DeleteContact` endpoint is used to delete a contact associated with a domain.
+
+## Parameters
+
+The following is a list of parameters for the `DeleteContact` endpoint:
+
+| Parameter Name | Data Type | Description                              |
+|----------------|-----------|------------------------------------------|
+| contact        | String    | Handle ID of the contact to be deleted.   |
+
+## Example Request
+
+The following is an example request for the `DeleteContact` endpoint:
+
+```json
+{
+  "contact": "C-12345"
+}
+```
+
+## Attributes
+
+The following is a list of the user attributes for the `DeleteContact` endpoint:
+
+| Field           | Description                                                         |
+|-----------------|---------------------------------------------------------------------|
+| code            | The response code indicating the result of the command.              |
+| description     | A brief description providing more information about the result.     |
+| request_status  | The status of the request.                                          |
+| request_id      | The unique identifier assigned to the request.                       |
+
+## Example Response
+
+The following is an example response returned by the `DeleteContact` endpoint:
+
+```json
+{
+  "code": 200,
+  "description": "Command completed successfully",
+  "request_status": "Successful",
+  "request_id": 42
+}
+```

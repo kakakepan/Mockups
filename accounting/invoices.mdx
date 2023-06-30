@@ -1,0 +1,16 @@
+---
+title: "Invoices"
+sidebarTitle: "Invoices"
+---
+
+Invoices are generated monthly for each reseller. They consolidate all the service orders that have been invoiced within a specific month. An invoice provides a summary of the services rendered to the reseller, along with the corresponding prices and total amount due. The invoice serves as a formal request for payment from the reseller.
+The **"Invoices"** page lists all the invoices for each reseller. For every reseller, there should be one invoice per month, grouping all the service orders that were invoiced during that month. The page should include the following fields:
+| Field          | Description                                                                   |
+| :------------- | :---------------------------------------------------------------------------- |
+| Date           | The month and year of the invoice, for example, 03-2022.                      |
+| Reseller Email | The email address of the reseller.                                            |
+| Invoice        | A "View" link opens a new page displaying a .txt invoice.                     |
+| Total Amount   | The total amount of the invoice calculated by summing all the service prices. |
+
+## Create Invoices
+Reseller can create invoices by using the Create Invoices in Scheduled Tasks page. This task runs on the first minute of each new month and considers all service orders from the previous month that have been marked as **"Invoiced"**. This task is to create monthly invoices for each reseller. It retrieves the necessary data from the service orders and generates invoices accordingly. The resulting data should be available on the **"Invoices"** page, with one monthly invoice per reseller.

@@ -1,0 +1,35 @@
+---
+title: "Status Domain"
+sidebarTitle: "Status Domain"
+---
+
+The **"StatusPendingRequests"** command is a new informational command in the SuperReseller dashboard. It aims to inform resellers about the additional fields needed for a pending domain request.
+
+When the **"StatusPendingRequests"** command returns a pending status, the displayed field will be:
+| Field                 | Description                                       |
+|-----------------------|---------------------------------------------------|
+| Domain                | The queried Domain Name                           |
+| Command               | The related command, for example "RegisterDomain"  |
+| DomainRequestStatus   | It should always be "Pending"                     |
+| Missing Data          | Possible values "Fields" or "Documentation"       |
+
+If there are missing fields, the displayed field will be:
+| Field                        | Description                                      |
+|------------------------------|--------------------------------------------------|
+| FieldName                    | The name of the additional field, for example "VAT number"   |
+| FieldType                    | The name of the field type, for example "Company Number"      |
+| RegularExpressionValidation  | The validation of the FieldType                             |
+
+If there is missing documentation, the displayed field will be:
+| Field                           | Description                                                      |
+|---------------------------------|------------------------------------------------------------------|
+| AdditionalDocumentationText     | The additional documentation text                                 |
+| AdditionalDocumentationURL      | The URL of the template document to download                      |
+
+## Access the Status Domain Command
+
+To check the domain status, follow these steps below:
+
+1. Navigate to the **Superreseller** dashboard here.
+2. Select the **Portfolio** menu.
+3. Click **Domain**.

@@ -1,0 +1,84 @@
+---
+title: "Cancelled Webhook"
+sidebarTitle: "Cancelled Webhook"
+---
+
+
+The **"Cancelled"** webhook is a type of webhook that is triggered when a service request or order is cancelled or terminated before completion. It serves as a notification mechanism to indicate that the requested service has been cancelled and will not be processed further.
+
+When the "Cancelled" webhook is triggered, it typically initiates a series of actions or updates in the system to handle the cancellation process. These actions can vary depending on the specific context and requirements of the service being processed. 
+# Cancelled Action list
+Here is the comprehensive list of Cancelled actions for each command:
+
+## Renew Domain – Cancelled
+
+When a webhook sets an item status to **"Cancelled"**, several actions are triggered:
+
+| Action                   | Description                                                                              |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Cancelled"**.                                                           |
+| Request_Main_Status      | is changed from **"Successful" **to **"Cancelled by RSS**".                              |
+| Expiration Date          | is rolled back to its previous state (before the **"Domain Renewal"** was requested).    |
+| Domain Status            | is rolled back to its previous state (before the **"Domain Renewal" **was requested).    |
+| Domain's Portfolio       | is updated to "**Auto Renew = No"**. If it's already set to** "No"**, no change is made. |
+| Service Order Status     | remains in the **"Invoiced" **status.                                                    |
+
+## Change Of Contact - Cancelled
+
+When a webhook sets an item's status to **"Cancelled"** , the actions depend on whether the original request required additional information/documentation or not.
+
+If additional information/documentation is not required:
+
+| Action                   | Description                                                                                                                                                  |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Executing_Item_Status_Id | is updated to **"Cancelled"**.                                                                                                                               |
+| Request_Main_Status      | is updated to **"Cancelled by RSS"**.                                                                                                                        |
+| Service Order Status     | is updated to **"Cancelled"** if it is not already in the **"Invoiced"** status. If the Service Order is in the **"Invoiced"** status, it remains unchanged. |
+| Domain Portfolio         | is updated with the previous contact IDs.                                                                                                                    |
+
+## SetExpDateForTransfer – Cancelled
+When a webhook sets an item's status to **"Cancelled"** , the following actions are triggered:
+- The **"Executing_Item_Status_Id"** is updated to **“Cancelled”**.
+- The **"Request_Main_Status** is updated to **“Cancelled by RSS”**.
+
+## Transfer Lock - Cancelled
+
+If a webhook sets an item's status to **"Cancelled"**, the following actions are triggered:
+
+- | Action                   | Description                           |
+  | ------------------------ | ------------------------------------- |
+  | Executing_Item_Status_Id | is updated to **"Cancelled"**.        |
+  | Request_Main_Status      | is updated to **"Cancelled by RSS"**. |
+  | Set Transfer Lock        | should be **"Rolled back"**.          |
+
+## Create Host – Cancelled
+
+When a webhook sets an item status to **"Cancelled"**, the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Cancelled"**.        |
+| Host_Status_Id           | is updated to **"Cancelled by RSS".** |
+| Request_Main_Status      | is updated to **"Cancelled by RSS"**. |
+| Create Host              | is updated to **"Reversed"**.         |
+
+## Update Host – Cancelled
+
+When a webhook sets an item status to **"Cancelled"**, the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Cancelled"**.        |
+| Host_Status_Id           | is updated to **"Cancelled by RSS"**. |
+| Request_Main_Status      | is updated to **"Cancelled by RSS"**. |
+| Host portfolio values    | should be updated to original values. |
+
+## Delete Host – Cancelled
+
+When a webhook sets an item status to **"Cancelled"**, the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Cancelled"**.        |
+| Host_Status_Id           | is updated to **"Active"**.           |
+| Request_Main_Status      | is updated to **"Cancelled by RSS"**. |

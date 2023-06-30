@@ -1,0 +1,60 @@
+---
+title: "API Management"
+sidebarTitle: "API Management"
+---
+
+The **"API Management"** feature allows users to manage API limits, banned resellers, notifications, and view API logs. This guide will describe the various sections and actions available in the API Management tab.
+
+## Limits
+
+The **"Limits"** section allows resellers to set up API limits as rules. You can specify different limits for each reseller. To access this section, follow these steps:
+
+1. Click on the **"API Management"** tab.
+2. Select the **"Limits"** option.
+3. For example, the **"API Limits"** page displays a table with the following columns:
+
+| Reseller      | Warn Rate Limit | Ban Rate Limit | Updated      | Comments                                      |
+| ------------- | --------------- | -------------- | ------------ | --------------------------------------------- |
+| Default       | X per second    | X per second   | Updated Date | This reseller has default rate limits.        |
+| Reseller Name | X per minute    | X per minute   | Updated Date | Custom rate limits are set for this reseller. |
+
+4. To edit or delete a limit, click on the **"Edit"** or **"Delete"** button .
+
+### Adding a Rule
+
+To add a new rule, follow these steps:
+
+1. Access the API Limits page.
+2. Click on the **"Add Rule"** button at the top right corner of the page.
+3. Select either **"Default**" or **"Reseller"** using the checkbox.
+4. If **"Reseller"** is selected, a drop-down menu will appear to select the reseller.
+5. Fill in the required fields.
+
+## Banned Resellers
+
+The **"Banned Resellers"** section display the banned resellers. To access this section, follow these steps:
+
+1. Click on the **"API MANAGEMENT"** tab.
+2. Select the **"Banned Resellers"** option.
+3. Click on the corresponding **"remove" **button to remove a banned reseller
+
+## Notifications
+
+The **"Notifications"** section displays warnings and bans for resellers. To access this section, follow these steps:
+
+1. Click on the **"API MANAGEMENT"** tab.
+2. Select the **"Notifications"** option to review the warnings and bans.
+
+## API Logs
+
+The **"API Logs"** section allows resellers to view logs for each API request, including success and error queries. To access this section, follow these steps:
+
+1. Click on the **"API MANAGEMENT"** tab.
+2. Select the **"API Logs"** option.
+3. For example, the **"API Logs"** page displays a table with the following columns:
+
+| ID | Object | Reseller Email | Command  | Response Code | Log Date   |
+| -- | ------ | -------------- | -------- | ------------- | ---------- |
+| 1  | User   | example@email  | Get Info | 200           | 2023-05-30 |
+| 2  | Order  | example@email  | Create   | 400           | 2023-05-29 |
+| 3  | Domain | example@email  | Renew    | 200           | 2023-05-28 |

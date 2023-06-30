@@ -1,0 +1,94 @@
+---
+title: "Additional Fields and Documentation"
+sidebarTitle: "Additional Fields and Documentation"
+---
+
+# Additional Fields
+
+The **"Additional fields"** refer to the specific information required beyond the basic command parameters to process the command successfully. They are necessary for certain domain extensions and registration scenarios based on the owner's country and entity type.
+
+The additional fields required vary depending on the command and extension, taking into account the owner's country and entity type. For more detailed information about the specific additional fields required for each command or extension, please refer to the **"Settings Additional Fields"** . The table below illustrates the additional fields required for domain registration based on the domain extension, owner's country, and entity type:
+
+| Domain Extension | Owner's Country | Entity Type | Additional Fields Required                           |
+|------------------|-----------------|-------------|------------------------------------------------------|
+| .FI              | Finland         | Individual  | Date of Birth (yyyy/mm/dd). HETU/Finnish identity code |
+| .FI              | Any             | Individual  | Date of Birth (yyyy/mm/dd)                            |
+| .com.br          | Brazil          | Company     | CNPJ number                                          |
+
+
+Users can ensure compliance with registration requirements by providing the necessary additional fields and successfully completing the domain registration process for specific extensions and registration scenarios.
+
+In this table, the **"Field Name"** column represents the field's name, and the "Description" column briefly describes the field's purpose and usage.
+
+| Additional Field Name | Description                                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------------------- |
+| profile_type_id       | Indicates the type of owner - 1 for a company (organization), 2 for an individual. If empty, applies to both. |
+| countries             | Specifies the countries to which the additional field applies. If empty, applies to all countries.            |
+
+# Additional Field Types
+
+The **"Additional fields Types"** refer to the **"additional field_ype"** in the **"Settings_AdditionalFields"**, which categorizes the type of field required for additional information during domain registration. It helps identify the specific nature of the additional field based on various extensions and registration scenarios.
+
+Company Number is an additional field type attributing to a unique identification number assigned to a company or organization. To provide a more precise understanding, here is a table illustrating additional field type **"Company Number"** and its corresponding types with their descriptions:
+
+| Company Number Types | Description                                                                                                                                                         |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| VAT Number           | Value-Added Tax Number tracks and monitors a company's tax obligations and transactions related to VAT.                                                             |
+| CNJP                 | CNPJ stands for "Cadastro Nacional da Pessoa Jurídica" and is used to provide information about a company's legal status, ownership structure, and tax obligations. |
+| Incorporation Number | Unique registration identifier assigned to a company upon its formation verifying the company's legal existence and compliance with regulations                     |
+
+# Additional Documentation
+
+The **"Additional documentation"** refers to the supplementary paperwork or files that may be required for certain services and extensions. The list of additional documentation for each service can be found in the **"Settings Additional Documentation"**. The following explanations are provided for better understanding:
+
+| Additional Documentation         | Description                                                                                                                                                                    |
+| :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| accept_scanned_copy              | Indicates whether scanned copies of documentation are accepted. If marked as "yes," scanned copies can be submitted. This may affect the format or structure of request forms. |
+| additional_documentation_file_en | Provides a downloadable template document in English that serves as a reference or guide for the required documentation.                                                       |
+
+# Additional Fields Type – MULTIUSE
+The **"MULTIUSE"- ADDITIONAL FIELDS TYPE"** allows fields to be reused for different domain requests, saving time and effort. The features offered by **"Additional Field Type- Misuse"** are listed in the following table:
+
+| Features of Additional Field Type- Misuse | Description                                                                                                                                                                                                                                                                                                                                  |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Field Reusability                         | Yes                                                                                                                                                                                                                                                                                                                                          |
+| Reusability Criteria                      | The field must be marked as **"MULTIUSE: Yes"**.                                                                                                                                                                                                                                                                                             |
+| Reusing Field Data                        | When a reseller provides a value for a specific additional field marked as **"MULTIUSE: Yes"**,  such as the **"Owner's Passport / Id Number"**, that value can be reused for future domains that require the same additional field.                                                                                                          |
+| Condition for Reuse                       | The owner profile must remain the same for future domains.                                                                                                                                                                                                                                                                                   |
+| Benefits of Field Reusability             | It saves time and effort by eliminating the need to request the same additional field data multiple times for the same owner profile. Streamlines the domain registration or transfer process by reusing existing additional field data. Reduces data duplication and ensures consistency across domain requests for the same owner profile. |
+
+## Saving Additional Field Type-Multiuse Data at Contact Level
+
+Saving **"Additional Field Type- Multiuse"** Data at the contact level offers significant advantages for handling domain requests. It ensures the availability and consistency of additional field data associated with the contact's profile, promoting accuracy and data integrity. It eliminates redundancy, ensures data availability, and enhances the efficiency of managing domain requests by offering the following functionalities:
+
+1. **Data Storage**  
+   When an additional field with the **"MULTIUSE"** type is provided for a domain request, the data is saved at the contact level.
+2. **Stored Data**  
+   For example, if a reseller provides a passport number or company number for the **"Owner's Passport / Id Number"** field, this data will be stored in the contact's profile.
+3. **Data Availability**  
+   The stored additional field data is accessible for future domain requests associated with the same contact.
+
+## Domain Request Status
+
+When using the **"Register Domain"** or **"Transfer In Domain"** commands for an extension that triggers an **"Additional field type-Multiuse"**, the domain request status will be affected based on the presence of the additional field in the owner's profile in the following ways:
+
+| Condition                                                                  | Domain Request Status   |
+| -------------------------------------------------------------------------- | ----------------------- |
+| Owner's profile includes the required Additional field type- Misuse        | "In Process" (Code 201) |
+| Owner's profile does not include the required Additional field type-Misuse | "Pending" (Code 202)    |
+
+## API Queries
+
+For API queries related to contact information, such as **"Status Contact"** and **"Update Contact"**, the **"Additional fields marked as "MULTIUSE""** will be made visible. This ensures that resellers can access and manage the additional field data when interacting with contact information through API requests.
+
+## Modifying Contacts
+
+To modify contacts using the **Additional fields type- MULTIUSE** in the Super Reseller platform, follow these steps:
+
+1. Locate the contact modification form by clicking [here](https://superreseller-qa.nominus.host/forms/contacts/modify).
+2. In the contact details, locate the "**Additional Fields"** section.
+3. The **Additional fields marked as "MULTIUSE"** will be visible if previously added to the contact. 
+4. Identify the **Additional field marked as "MULTIUSE"** that you wish to modify.
+5. Make the necessary changes to the additional field data.
+6. Save the modifications to update the contact's **Additional field type-Multiuse**.
+7. Review the updated contact details to verify that the modifications have been successfully applied.

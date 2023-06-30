@@ -1,0 +1,43 @@
+---
+title: "AddDocsToPendingRequests"
+sidebarTitle: "AddDocsToPendingRequests"
+---
+
+The `AddDocsToPendingRequests` endpoint is an API endpoint used to add documents to a pending request. It allows you to upload and associate documents with a specific request, such as a domain registration or transfer request.
+
+## Parameters
+The following is a list of parameters for the `AddDocsToPendingRequests` endpoint:
+| Parameter Name  | Data Type | Description                                                                                                       |
+|-----------------|-----------|-------------------------------------------------------------------------------------------------------------------|
+| cancel          | Boolean   | Determines whether to cancel the pending request. If set to `true`, the request will be cancelled.               |
+| documents       | Array     | An array of document objects containing the field ID and the URL of the document to be added to the request.     |
+
+## Example Request
+The following is an example request for the `AddDocsToPendingRequests` endpoint:
+```json
+{
+  "cancel": false,
+  "documents": [
+    {
+      "field_id": "document_url0",
+      "value": "https://document.url"
+    }
+  ]
+}
+```
+
+## Attributes
+The following is a list of attributes for the `AddDocssToPendingRequests` endpoint:
+| Attribute Name  | Description                                                                                                  |
+|-----------------|--------------------------------------------------------------------------------------------------------------|
+| code            | The response code indicating the result of the command.                                                       |
+| description     | A brief description providing more information about the result of the command.                              |
+
+## Example Response
+The following is an example object returned by the `AddFieldsToPendingRequest` endpoint:
+```json
+{
+  "code": 200,
+  "description": "Command completed successfully"
+}
+```

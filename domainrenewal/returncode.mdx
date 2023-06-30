@@ -1,0 +1,44 @@
+---
+title: "Return Codes"
+sidebarTitle: "Return Codes"
+---
+
+The **"Return Codes"** page provides a list of possible response codes that can be encountered after sending a command. These codes categorize the outcomes into three types: Successful, Temporary Error, and Permanent Error. The purpose of this page is to document and manage the return codes for better understanding and troubleshooting.
+On this page, the admin user can manage the following fields:
+
+- **Text to Display**: The descriptive text that represents the return code.
+- **Additional Explanation**: Any additional information or explanation related to the return code.
+
+The other fields, such as the return code itself, type (Successful, Temporary Error, or Permanent Error), and any predefined explanations, are not manageable and are predefined. The **"Retune Codes"** page serves as a reference for understanding the different return codes and their associated meanings. It aids in the interpretation and handling of command responses, facilitating effective troubleshooting and resolution of any issues that may arise during command execution.
+
+## Access the Return Code Page
+To access the return code in the Superreseller dashboard, follow the steps below:
+1. On the main navigation menu, click the **API Integration** section.
+2. Select the **Return Codes** tab.
+
+## Response Codes
+Below is the comprehensive list of all the return codes of the superreseller endpoints:
+| Type    | Code | Text to Display                                                | Related to Command                                       | Additional Explanation                                                                                                                  |
+|---------|------|----------------------------------------------------------------|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Success | 200  | The command has succeeded.                                     | Any                                                     | Command completed successfully.                                                                                                         |
+| Success | 201  | The command is "In Process"                                    | Register domain, Transfer Domain                  | The request is left as "In Process".                                                                                                    |
+| Error   | 202  | The command is "Pending"                                       | Register Domain, Transfer Domain                  | The command has been successfully processed for the request, but the status is "Pending".                                               |
+| Error   | 214  | Contact/Host name not available.                               | Check Contact, Check Host                        | The entered name is not available to be used for Contact or Host.                                                                        |
+| Success | 215  | Contact/Host name available.                                   | Check Contact, Check Host                        | The entered name is available to be used for Contact or Host.                                                                            |
+| Error   | 502  | Inactive Domain                                                | Renew Domain                                            | Command cannot be executed for the domain as it is not an active domain.                                                                 |
+| Error   | 503  | Service Unavailable due to surpassing the registration extension years | Renew Domain                                      | Command cannot be executed for the domain as it surpasses the maximum number of registration extension years.                        |
+| Error   | 504  | Timeout- Domain about to expire in 30 days                     | Renew Domain                                            | The execution of the command is not possible for the specified domain and extension, as the renewal window becomes unavailable 30 days prior to the expiration of the domain. |
+| Error   | 506  | Contact/Host already in use by a domain.                        | Modify Host, Delete Contact                      | The contact or host you are attempting to use is already associated with a domain.                                                       |
+| Error   | 515  | Blocked Domains                                                | Register Domains, Transfer In Domains, Transfer Domain | This error displays the list of blocked domains.                                                                                        |
+| Error   | 516  | Registered within 60 days                                      | Transfer In Domains, Transfer Lock, Transfer Domain | The commands cannot be run for a domain that has transferred or registered within 60 days.                                                |
+| Error   | 517  | Incorrect Format                                               | Create Host, Modify Host                          | Please provide the host name in the following format: "ns1.docu-test-case.com". Ensure that the domain host is associated with an active domain managed by the reseller. |
+| Error   | 518  | Duplicated host names                                          | Create Host                                             | The host name cannot be created because it is already in use.                                                                            |
+| Error   | 519  | Incorrect Format                                               | Create Host, Modify Host                          | Enter the IP address of the host in either IPV4 or IPV6 format. If the entered format is incorrect, an error will be displayed.          |
+| Error   | 520  | Host already in use by domain                                  | Modify Host                                             | Prior to host deletion, the system verifies if the host is currently being utilized by any domain. If the host is in use, an error message will be displayed.                                                |
+| Error   | 527  | Additional domain fee for late renewal/restoring will be charged | Renew Domain                                            | Command cannot be executed for the domain without accepting an additional fee for late renew/restore domain.                            |
+| Error   | 528  | Missing Additional Information not found                       | Add Fields                                             
+| Error   | 529  | Missing Required Field                                         | Add Fields                                              | Command cannot be executed as a required field is missing.                                                                                |
+| Error   | 531  | No "Pending" request found for additional documentation        | Status Pending Request                                  | If the queried domain is not found to have a "Pending" request for additional documentation.                                            |
+| Error   | 535  | "Pending" Request for additional fields                         | Status Pending Request                                  | Domain has not been created as portfolio as there is a "Pending" request for additional fields.                                        |
+| Error   | 546  | Credit limit exceeded                                          | Commands with the field "**Triggers Services = Yes**"   | Error should appear if the reseller does not have funds in his account.                                                                  |
+| Error   | 570  | Validation Error Message                                       | Add Fields, Add Documentation, Renew Domain  | The entered data of the reseller does not pass validation due to an unsupported registration period.                                 |

@@ -1,0 +1,56 @@
+---
+title: "Pending Domains"
+sidebarTitle: "Pending Domains"
+---
+
+The **"Pending Domains"** page provides a list of all requests that are currently in the **"Pending"** status. The **"Pending Domains"** page consists of a table with three columns: **"Domain"**, **"Command"**, and **"Missing Data"**. The table provides an overview of the pending domain requests:
+
+| Domain      | Command      | Missing Data    |
+| ----------- | ------------ | --------------- |
+| example.com | Transfer In  | Information     |
+| test.com    | Register     | Documentation   |
+| foo.com     | Transfer Out | Expiration Date |
+
+## Accessing the Pending Domains
+
+To access the **"Pending Domains"** page, follow these steps:
+
+1. Navigate to the **"SuperReseller dashboard"** [here](https://superreseller-qa.nominus.host/login/?next=/).
+
+2. Go to the **"Portfolio"** tab.
+
+3. Select the **"Pending Domains"** feature to access the host commands.
+
+## Completing Data
+
+To complete the missing data for a domain request, follow these steps:
+
+1. Locate the domain request in the table.
+2. At the right of the record, click on the **"Complete Data"** button.
+3. You will be redirected to the corresponding page based on the missing data type:
+
+| Domain      | Missing Data    | Redirect Action                                |
+| ----------- | --------------- | ---------------------------------------------- |
+| example.com | Information     | Redirect to Additional Fields                  |
+| test.com    | Documentation   | Redirect to Additional Documentation           |
+| foo.com     | Expiration Date | If Admin User: Redirect to Set Expiration Date |
+
+<Warning>
+**Caution:**
+- The **"Expiration Date"** value for the **"Missing Data"** column applies only to the **"Transfer In"** command.
+- The option to set the **"Expiration Date"** is only available for admin users. Non-admin users will not see the **"Expiration Date"** option.
+</Warning>
+
+## Updating Pending Domain Requests
+
+When a reseller provides an **"Additional field type-Multiuse"** value for contact with **"pending domain requests"**, the system seamlessly updates the requests with the new information. This automatic process ensures that all **"pending domain requests"** associated with the contact are synchronized with the latest **"Additional field type-Multiuse"** data. 
+
+1. **Streamlined Management Process:** The system automates updating pending domain requests, eliminating the need for manual intervention and reducing administrative burden.
+2. **Real-time Access to Latest Information:** Resellers have immediate access to the most up-to-date information for each request, allowing for efficient handling and decision-making.
+3. **Data Consistency:** By ensuring that all pending requests reflect the latest additional field data, the system helps maintain data consistency across the platform.
+
+**Example Scenario:**
+
+- Let's consider a situation where there are ten **"pending domain requests**" that require the passport number for contact P-JM00001. 
+- When the reseller provides the passport number for this contact, the system promptly updates all ten domain requests with the newly provided information.
+- This automatic **"Updating Pending Domain Requests"** process of  **"Additional field type-Multiuse"** eliminates the need for manual updates, ensuring that the pending requests accurately reflect the most current additional field data.

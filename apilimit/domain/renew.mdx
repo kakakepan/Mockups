@@ -1,0 +1,44 @@
+---
+title: "RenewDomain"
+sidebarTitle: "RenewDomain"
+---
+
+The `RenewDomain` endpoint is an API endpoint used for renewing a domain registration. It allows you to extend the registration period of a domain name for a specified number of years. 
+
+## Parameters
+The following is a list of parameters for the `RenewDomain` endpoint:
+| Parameter Name          | Data Type | Description                                                                                                                      |
+|-------------------------|-----------|----------------------------------------------------------------------------------------------------------------------------------|
+| number_of_years         | Integer   | Specifies the number of years for which the domain will be renewed.                                                               |
+| accept_late_renewal_fee | Boolean   | Determines whether the reseller accepts the late renewal fee for the domain.                                                    |
+
+## Example Request
+The following is the example request for the `RenewDomain` endpoint:
+```json
+{
+  "number_of_years": 1,
+  "accept_late_renewal_fee": true
+}
+```
+
+## Attributes
+The following is a list of the user attributes for the `RenewDomain` endpoint:
+| Field             | Description                                  |
+|-------------------|----------------------------------------------|
+| code              | The response code indicating the result of the command. |
+| description       | A brief description providing more information about the result of the command. |
+| request_status    | The status of the request. |
+| request_id        | The unique identifier assigned to the request. |
+| expiration_date   | The new expiration date of the domain, represented as a date in the format "YYYY-MM-DD".  |
+
+## Example response
+The following is the example object returned by the `RenewDomain` endpoint:
+```json
+{
+  "code": 200,
+  "description": "Command completed successfully",
+  "request_status": "Successful",
+  "request_id": 42,
+  "expiration_date": "2025-01-01"
+}
+```

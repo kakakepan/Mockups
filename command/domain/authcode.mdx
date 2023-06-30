@@ -1,0 +1,27 @@
+---
+title: "Update Auth Code"
+sidebarTitle: "Update Auth Code"
+---
+
+**"UpdateAuthCode"** is a command option available in the online form for domain registration. When selected by the user, it allows them to update the authorization code for a domain. The authorization code, also known as an EPP code or transfer code, is a security measure used to verify the ownership of a domain during the transfer process.
+Upon selecting the **"UpdateAuthCode"** command, the form will display a single field labeled "Authorization Code." This field is required to follow a specific format to ensure its validity. 
+
+<Note>
+**The format criteria are as follows:**
+
+- The authorization code must consist of eight (8) characters.
+- It should be a combination of alphanumeric characters.
+- The code must contain at least one (1) numeric character.
+- It should also include at least one (1) alphabetic character.
+- Additionally, the code must contain at least one (1) special character.
+</Note>
+
+The form includes validation to ensure that the entered authorization code meets these requirements. If the provided code does not adhere to the specified format, an error message will be displayed to the user.
+
+To assist users in generating a valid authorization code, a small button labeled "Generate Code" is placed next to the **"Authorization Code"** field. Clicking this button automatically generates a random number that satisfies the required validation criteria.
+
+The **"Authorization Code"** field is displayed in the following areas:
+
+1. **Domain Registration Request table:** It appears as a column in the table, allowing users to view the authorization code associated with each domain registration request.
+2. **Domain Portfolio:** The field is visible in the domain details section of the portfolio page (https://superreseller-qa.nominus.host/portfolio/domains), providing users with access to the authorization code for each domain.
+3. **Processing Page:** When processing the domain registration request, the **"Authorization Code"** field is passed to the processing page (http://superreseller-qa.nominus.host/xml/RegisterDomain) to ensure the updated code is stored correctly.

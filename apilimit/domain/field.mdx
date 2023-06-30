@@ -1,0 +1,46 @@
+---
+title: "AddFieldsToPendingRequest"
+sidebarTitle: "AddFieldsToPendingRequest"
+---
+
+The `AddFieldsToPendingRequest` endpoint is an API endpoint used to add additional fields to a pending request. It allows you to include extra information or data in a request that is currently pending.
+
+## Parameters
+The following is a list of parameters for the `AddFieldsToPendingRequest` endpoint:
+
+| Parameter Name  | Data Type | Description                                                                                                              |
+|-----------------|-----------|--------------------------------------------------------------------------------------------------------------------------|
+| cancel          | Boolean   | Determines whether to cancel the pending request. If set to `true`, the request will be cancelled.                      |
+| fields          | Array     | An array of field objects containing the field ID and its corresponding value to be added to the pending request.        |
+
+## Example Request
+The following is an example request for the `AddFieldsToPendingRequest` endpoint:
+```json
+{
+  "cancel": false,
+  "fields": [
+    {
+      "field_id": "CompanyNumber",
+      "value": "31415"
+    }
+  ]
+}
+
+```
+
+## Attributes
+The following is a list of attributes for the `AddFieldsToPendingRequest` endpoint:
+
+| Attribute Name  | Description                                                                                                  |
+|-----------------|--------------------------------------------------------------------------------------------------------------|
+| code            | The response code indicating the result of the command.                                                       |
+| description     | A brief description providing more information about the result of the command.                              |
+
+## Example Response
+The following is an example object returned by the `AddFieldsToPendingRequest` endpoint:
+```json
+{
+  "code": 200,
+  "description": "Command completed successfully"
+}
+```

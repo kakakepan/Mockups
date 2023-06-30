@@ -1,0 +1,21 @@
+---
+title: "Transfer In"
+sidebarTitle: "Transfer In"
+---
+
+**TransferIn** is a command that allows us to assume control of an already registered domain. The expiration date of a transferred domain is not dependent on the date the domain was initially entered into the platform; rather, it is dependent on the expiration date that the resellers have explicitly input.
+<Note>Please note that we charge for this service, similar to domain registration.</Note>
+
+## Access the TransferIn Command
+Access the command by following the steps below:
+1. Navigate to the **Superreseller dashboard** [here](https://superreseller-qa.nominus.host/).
+2. Select the **Online Form** menu.
+3. Click **Transfer** under the **Renew** command.
+
+<Note>
+Important things to note:
+- Similar to domain registration, some extensions only support the **"Owner"** contact, while others allow for the inclusion of additional contacts such as **"Admin"**, **"Tech"**, and **"Billing"**. 
+    This is managed by the `display_full_contact_data` field.
+- Trustee Logic is implemented in this command,  For example, if a user requests a .com.br domain and the owner is not from Brazil, a message will appear stating: **"Please note that the Owner does not meet the residency requirement. To register the domain, you need to order a Trustee Service for this domain, which incurs a fee of $XX"**.
+- All extensions for this command require additional information or documentation, which will result in requests being set to a **"Pending"** status.
+</Note>

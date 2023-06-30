@@ -1,0 +1,102 @@
+The **"Trustee Service"** allows users to meet residency requirements for specific country domain extensions by providing a trustee for an additional fee. This guide explains how to enable the Trustee Service, when it is required, and how it integrates with other domain management features.
+
+# Access the Trustee Service
+
+1. Navigate to the **"SuperReseller dashboard"** [here](https://superreseller-qa.nominus.host/login/?next=/).
+2. Go to the domain portfolio.
+
+# Identify the Domain Requiring Trustee Service
+
+Review your domain portfolio and identify the domain for which you need to enable the Trustee Service. Look for the domain extension that has residency requirements, which cannot be met by you or your organization.
+
+# Enabling Trustee Service
+
+For certain country domain extensions, it is necessary to meet residency requirements. If you are unable to meet these requirements, **"SuperReseller"** provides the Trustee Service to fulfill the residency requirement, When the Trustee Service is enabled for a domain, it is marked in the domain portfolio with the field **"Trustee = Yes,"** indicating that the service will be charged during domain renewal.
+
+# Registering a Domain
+
+Before registering a domain using the `RegisterDomain` command, it's crucial to ensure that the extension has the **"Trustee Enabled"** field set to **"Yes"**. 
+
+If the trustee service is triggered based on the residency conditions set in the **"Trustee not triggering countries"** field, the user will be charged for the trustee service. The price for the trustee service can be found in the list of **SKUs.**
+
+## Updating a ".com.br" Domain:
+
+If you want to update the registration of a **".com.br"** domain for a period of 5 years and the extension has **"Trustee Enabled"** set to "**Yes,"** it's important to follow these steps:
+
+1. **Check if the owner triggers the trustee service**:
+
+Verify if the owner doesn't meet the residency requirement before submitting the update.
+
+2. **Display a warning message**:
+
+ If the trustee service is necessary, show a message explaining that the owner must order the Trustee Service due to not meeting the residency requirement. 
+
+<Note>
+Ordering the Trustee Service will incur an additional fee.
+</Note>
+
+After displaying the warning message, two options become available:
+
+1. **Accept Trustee Service**: By clicking this button, the user confirms their consent to order the **"Trustee Service"**.
+2. **Cancel Domain Registration**: Clicking this button allows the user to cancel the domain registration process.
+
+## Domain Registration Completion
+
+After filling out the form and completing the domain registration process, the domain request will indicate that it was ordered with the **"Trustee Service"**. Additionally, a domain portfolio will be created with the variable **"Trustee"** set to **"Yes"**. In the **"Service Orders section"**, two services will appear:
+
+1. **Domain Registration**: This service represents the domain registration itself.
+2. **Trustee Service**: This service indicates the inclusion of the Trustee Service for the domain.
+
+# Renewing a Domain
+
+When renewing a domain manually or through an automatic process, follow these steps:
+
+1. **Check the domain portfolio:**
+
+ Verify if the **"Trustee = Yes"** field is present in the domain portfolio.
+
+2. **Create Trustee Service:**
+
+ If the **"Trustee = Yes"** field exists, create the Trustee Service for the same domain.
+
+In the **"Service Orders section"**, two services will appear:
+
+**Domain Renewal:** This service represents the renewal of the domain itself.  
+**Trustee Service:** This service indicates the inclusion of the Trustee Service for the domain.
+
+# Change of Contacts
+
+Before using the **"Change Of Contacts"** command to modify domain contacts, it's important to follow these steps to ensure a smooth process for changing domain contacts. 
+
+1. Check **"Trustee Enabled"** field: 
+
+Verify if the extension has the **"Trustee Enabled"** field set to **"Yes."**
+
+2. **Residency conditions and trustee service:** 
+
+If the trustee service is triggered based on residency conditions, the command should be blocked as the new owner doesn't meet the residency requirements. Display an error message stating, 
+
+`"Command cannot be posted as the new owner does not meet the residency requirements." `
+
+In this case, the Trustee Service is not offered for the Change Of Contacts command.
+
+3. **Trustee requirement for the extension:**
+
+ If the trustee service is not triggered but the extension requires a trustee, check if the domain portfolio has the "**Trustee = Yes"** field.
+
+4. **Update "Trustee = No":**
+
+ If the **"Trustee = Yes"** field exists in the domain portfolio, update the value to **"Trustee = No"** since the user is providing their own information.
+
+<Note> Proper checks and updates are made to accommodate residency requirements and the trustee service, if necessary.</Note>
+
+After this, the rest of the process for change of contact can be continued by clicking [here](https://pena-team-sandbox.readme.io/reference/change-of-contacts).
+
+<Note>
+**Important Things to Note**:
+
+- **"Request Id"** should be linked to the request that initiated the service (e.g., **"RegisterDomain"**  or **"RenewDomain"** ).
+- Bundled services can result from a single request, leading to multiple services.
+- When two services share the same **"Request Id"**, updates or changes made to one service should be applied to the other.
+- For instance, if the **"Domain Registration"** service is updated to **"Invoice = Yes,"** the corresponding **"Trustee Service"** should also be updated to **"Invoice = Yes"**.
+</Note>

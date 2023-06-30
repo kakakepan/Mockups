@@ -1,0 +1,81 @@
+---
+title: "StatusPendingRequests"
+sidebarTitle: "StatusPendingRequests"
+---
+
+The `StatusPendingRequests` endpoint is an API endpoint used to retrieve the status of pending requests related to a domain. It allows you to check the status of requirements or documents that are pending for a specific domain registration.
+
+## Parameters
+The following is a parameter for the `StatusPendingRequests` endpoint:
+| Parameter Name | Data Type | Description                                         |
+|----------------|-----------|-----------------------------------------------------|
+| domain         | String    | The domain name for which to retrieve the status.    |
+
+
+## Example Requests
+The following is an example request for the `StatusPendingRequests` endpoint:
+```json
+{
+  "domain": "123test.co.id"
+}
+```
+
+## Attributes
+The following are the attributes returned by the `StatusPendingRequests` endpoint:
+| Attribute                          | Description                                            |
+|------------------------------------|--------------------------------------------------------|
+| code                               | The response code indicating the result of the command. |
+| description                        | A brief description providing more information about the result of the command. |
+| pending_requirements               | The list of pending requirements for the specified domain.    |
+| pending_requirements.domain_name   | The domain name for which the requirements are pending.   |
+| pending_requirements.command       | The command associated with the pending requirements.   |
+| pending_requirements.domain_request_status | The status of the domain request.   |
+| pending_requirements.fields        | The list of fields that require completion for the domain registration. |
+| pending_requirements.documents     | The list of documents that require submission for the domain registration. |
+
+Each field in the `pending_requirements.fields` list has the following attributes:
+| Attribute                           | Description                                            |
+|-------------------------------------|--------------------------------------------------------|
+| field_id                            | The identifier of the document field.                   |
+| description                         | A description of the document.                          |
+| download_url                        | The URL for downloading the document.                   |
+| name                                | The name or label of the field.                       |
+| type                                | The type of the field.                                |
+| validation_regular_expression       | The regular expression used for validating the field. |
+
+Each document in the `pending_requirements.documents` list has the following attributes:
+| Attribute                           | Description                                            |
+|-------------------------------------|--------------------------------------------------------|
+| field_id                            | The identifier of the document field.                   |
+| description                         | A description of the document.                          |
+| download_url                        | The URL for downloading the document.                   |
+
+## Example Response
+The following is an example response returned by the `StatusPendingRequests` endpoint:
+```json
+{
+  "code": 200,
+  "description": "Command completed successfully",
+  "pending_requirements": {
+    "domain_name": "domain.tld",
+    "command": "RegisterDomain",
+    "domain_request_status": "Pending",
+    "fields": [
+      {
+        "field_id": "CompanyNumber",
+        "name": "CNPJ:",
+        "type": "Company Number",
+        "description": "Company Number",
+        "validation_regular_expression": "^.{2,180}$"
+      }
+    ],
+    "documents": [
+      {
+        "field_id": "document_url0",
+        "description": "string",
+        "download_url": "https://download.from/that.link"
+      }
+    ]
+  }
+}
+```

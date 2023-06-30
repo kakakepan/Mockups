@@ -1,0 +1,29 @@
+---
+title: "Obtain Handle Id"
+sidebarTitle: "Obtain Handle Id"
+---
+
+The Handle ID is essential for executing the logic of the **"Register Domain"** command.  By obtaining the correct Handle IDs, it can ensure a seamless execution of the **"Register Domain"** command. This user guide provides instructions on how to obtain the Handle ID in **"SuperReseller"** after posting data to the **"Register Domain And Create Contacts"** endpoint.
+
+## Accessing Handle Id
+
+Follow these steps to access Handle Id:
+
+1. After posting the data to the **"Register Domain And Create Contacts"** endpoint, the system needs to check if the entered contact IDs already exist in **"SuperReseller"**.
+2. The system should perform a check for each of the following contact IDs: **owner_internal_contact_id**, **admin_internal_contact_id**, **tech_internal_contact_id**, and **billing_internal_contact_id**.
+3. If any of the contact IDs are already associated with a contact in **"SuperReseller"**, it means that the contact has already been created. 
+4. In this case, the system can proceed to obtain the corresponding Handle ID for each contact.
+5. If any of the contact IDs are not found in **"SuperReseller"**, it indicates that the contacts have not been created yet. In this scenario, the system should create the contacts and rerun the process.
+
+## Acquiring Handle Id
+
+Follow these steps to acquire Handle Id:
+
+1. Once the contacts are created (or if they were already present), the system should obtain the Handle ID for each contact. 
+2. This Handle ID will be required for executing the logic of the **"Register Domain"** command.
+3. Finally, the system can proceed to execute the logic of the **"Register Domain"** command using the obtained Handle IDs.
+
+<Note>
+- Accurate association of all required contact IDs with their corresponding contacts is crucial.
+- Failing to provide the correct Handle IDs can lead to errors during the execution of the **"Register Domain"** command.
+</Note>

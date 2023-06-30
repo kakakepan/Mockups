@@ -1,0 +1,63 @@
+---
+title: "Sent to Provide Webhook"
+sidebarTitle: "Sent to Provide Webhook"
+---
+
+The **"Sent to Provider"** webhook is a type of webhook that is triggered when a service request or order is successfully sent to the designated service provider for further processing. It serves as a notification mechanism to indicate that the requested service has been successfully dispatched to the provider and is awaiting their actions.
+
+When the "Sent to Provider" webhook is triggered, it typically initiates a series of actions or updates in the system to facilitate the handover of the service request. These actions can vary depending on the specific context and requirements of the service being processed. 
+
+# Sent to Provide Action list
+Here is the comprehensive list of Sent to Provide actions for each command:
+
+## Renew Domain – Sent to Provider
+
+When a webhook sets an item status to **"Sent to Provider"**, the following action is triggered:
+
+- **"Executing_Item_Status_Id"** is updated to **"Sent to Provider"**.
+
+## Change Of Contact - Sent to Provider
+
+When a webhook sets an item's status to **"Sent to Provider"** , the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Sent to Provider"**. |
+| Service Order Status     | is updated to **"Sent to Provider"**. |
+
+## SetExpDateForTransfer – Sent to Provider
+When a webhook sets an item's status to **"Sent to Provider"** , the following action is triggered:
+- The **"Executing_Item_Status_Id"** is updated to **“Sent to Provider”**.
+
+## Transfer Lock - Sent to Provider
+
+When a webhook sets an item's status to **"Sent to Provider"**, the following action is triggered:
+
+- **"Executing_Item_Status_Id"** should be updated to **"Sent to Provider"**.
+
+## Create Host – Sent to Provider
+
+When a webhook sets an item status to** "Sent to Provider"**, the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Sent to Provider"**. |
+| Create Host              | is updated to **"Cancelled"**.        |
+
+## Update Host – Sent to Provider
+
+When a webhook sets an item status to **"Sent to Provider"**, the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Sent to Provider"**. |
+| UpdateHost               | is updated to **"Cancelled"**.        |
+
+## Delete Host – Sent to Provider
+
+When a webhook sets an item status to **"Sent to Provider"**, the following actions are triggered:
+
+| Action                   | Description                           |
+| ------------------------ | ------------------------------------- |
+| Executing_Item_Status_Id | is updated to **"Sent to Provider"**. |
+| Delete Host              | is updated to **"Cancelled"**.        |

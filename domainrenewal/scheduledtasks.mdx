@@ -1,0 +1,80 @@
+---
+title: "Scheduled Tasks"
+sidebarTitle: "Scheduled Tasks"
+---
+
+Scheduled tasks is a Superreseller dashboard feature that manages and monitors scheduled tasks. Each task has a run now button. The selected scheduled task will be executed when a reseller clicks the button.
+The comprehensive list of available types of scheduled tasks is as follows:
+
+## Inform Reseller about New Requests or Changes in Status
+**"InformAboutRequests"** is a task that examines the **"Request_Main_Domain"** table every 5 minutes for new requests or status updates.  The task sends an informational email to the reseller whenever a form is submitted or a request's status is updated, if there are any new requests or updated statuses. The email contains the fields listed below:
+
+| Field          | Description                                                                                   |
+|----------------|-----------------------------------------------------------------------------------------------|
+| Item_Id        | A unique identifier for the item or task associated with the reseller's request or status update. |
+| Reseller_Name  | The name of the reseller who made the request or whose request's status has been updated.       |
+| Reseller_Email | The email address of the reseller associated with the domain-related task.                      |
+| FullDomName    | The updated domain name.                                                                      |
+| Command_Name   | The name of the command or action associated with the request or status update.                |
+| Request_Id     | The identifier of the specific request related to the item or task.                             |
+| Request_Status | The current status of the request.                                                            |
+| New_Request    | A field indicating whether the item or task represents a new request or a status update. (YES/NO)     |
+
+## Inform and Update Soon-to-Expire Domains
+Once per day at 12:00 UTC, **"InformAboutSoonToExpire"** informs the resellers about domains that are nearing their expiration dates. The task will list all domains that are **30**, **7**, and **1 day(s)** away from their **"Expiration Date"** and have a status of **"Registered"**. These domains will be updated to the status **"Soon to Expire"**. This task sends warning email to resellers about domains that are about to expire. The email contains the following fields:
+
+| Field                | Description                                                         |
+|----------------------|---------------------------------------------------------------------|
+| Item_Id              | A unique identifier for the item or task associated with the domain. |
+| Reseller_Name        | The name of the reseller associated with the domain.                 |
+| Reseller_Main_Email  | The main email address of the reseller.                              |
+| FullDomName          | The domain name.                                                    |
+| DaysToExpiration     | The number of days until the domain's expiration (30, 7, or 1).      |
+
+## Inform and Update Expired - Recoverable Domains
+Once per day at 12:00 UTC, **"InformAboutExpirationRecoverable"** lists all domains with the status **"Soon to Expire"** whose current **"Expiration Date"** matches the current date, and the sum of the **"Grace Period"** and **"Deletion Period"** is equal to or greater than 1 day. This task sends an email informing resellers about domains that have expired but can still be recovered. The email contains the following fields:
+
+| Field                | Description                                                         |
+|----------------------|---------------------------------------------------------------------|
+| Item_Id              | A unique identifier for the item or task associated with the domain. |
+| Reseller_Name        | The name of the reseller associated with the domain.                 |
+| Reseller_Main_Email  | The main email address of the reseller.                              |
+| FullDomName          | The domain name.                                                    |
+
+## Inform and Update Expired Domains
+Once per day at 12:00 UTC, **"InformAboutExpiration"** lists two types of domains:
+- Domains with the status **"Soon to Expire"** whose current **"Expiration Date"** matches the current date, and the sum of the **"Grace Period"** and **"Deletion Period"** is equal to 0 days or null.
+- Domains with the status **"Expired - Recoverable"** whose **"Expiration Date"** plus the **"Grace Period"** plus the **"Deletion Period"** is the same as or older than the current date.
+
+
+The task will update their status to **"Expired"**. This task sends an email informing the resellers about domains that have expired and can no longer be renewed. The email contains the following fields:
+
+| Field                | Description                                                         |
+|----------------------|---------------------------------------------------------------------|
+| Item_Id              | A unique identifier for the item or task associated with the domain. |
+| Reseller_Name        | The name of the reseller associated with the domain.                 |
+| Reseller_Main_Email  | The main email address of the reseller.                              |
+| FullDomName          | The domain name.                                                    |
+
+## Inform About Auto Renewal
+Once per day at 12:00 UTC, **"InformAboutAutoRenew"** lists all domains that are between **30** and **8** days away from their **"Renewal Date"**, have a status of **"Registered"**, and have the **"Auto Renew"** field set to **"Yes"**. This task sends an email to resellers informing them of forthcoming automatic domain renewals and giving them time to cancel the renewal if desired. The email contains the following fields:
+
+| Field                | Description                                                         |
+|----------------------|---------------------------------------------------------------------|
+| Item_Id              | A unique identifier for the item or task associated with the domain. |
+| Reseller_Name        | The name of the reseller associated with the domain.                 |
+| Reseller_Main_Email  | The main email address of the reseller.                              |
+| FullDomName          | The domain name.                                                    |
+| DaysToAutoRenewDate     | The number of days until the domain's auto renew (30, or 8).      |
+
+## Inform and Execute Auto Renewal
+Once per day at 12:00 UTC, **"InformAboutExecutedAutoRenewals"** lists all domains with the status **"Registered"**, **"Auto Renew"** set to **"Yes"**, and an **"Expiration Date"** that is 7 days before the current date. For each listed domain, the task will post a **"DomainRenew"** command as if the reseller manually filled the **"AutoRenew"** form. The renewal will be done for the minimum number of years supported for domain renewal by the extensions. This task sends an email to resellers informing them of forthcoming automatic domain renewals and activating the **"DomainRenew"** command automatically. The email contains the following fields:
+
+| Field                | Description                                                         |
+|----------------------|---------------------------------------------------------------------|
+| Item_Id              | A unique identifier for the item or task associated with the domain. |
+| Reseller_Name        | The name of the reseller associated with the domain.                 |
+| Reseller_Main_Email  | The main email address of the reseller.                              |
+| FullDomName          | The domain name.                                                    |
+
+<Note>Please ensure that a flag is used to prevent multiple auto renewals for the same domain portfolio within a day.</Note>

@@ -1,0 +1,29 @@
+---
+title: "Update Lock"
+sidebarTitle: "Update Lock"
+---
+
+The **"SetUpdateLock"** command is used to modify the transfer lock status of a domain name. It allows the reseller to control whether the domain can be transferred to another registrar or not. This command provides the reseller with the flexibility to enforce or lift the transfer lock on a domain, ensuring the security and ownership control of the domain name. 
+The command operates as follows:
+
+| Update Lock Values | Description                                                                                              |
+| -------------------- | -------------------------------------------------------------------------------------------------------- |
+| **"Yes"**            | Sets the transfer lock to enabled, restricting the reseller from modifying the contacts associated with the domain. |
+| **"No"**             | Sets the transfer lock to disabled, granting the reseller the ability to update the domain's contacts as necessary.   |
+
+## Access the Update Lock Command
+
+To set the Update Lock for a domain, follow these steps:
+
+1. Navigate to the **"Superreseller dashboard"** [here](https://superreseller-qa.nominus.host/login/?next=/).
+2. Navigate to the [modify form](https://superreseller-qa.nominus.host/forms/domains/modify) for domains.
+3. Select the appropriate reseller from the available options.
+4. Choose the desired domain from the list.
+5. Locate the **"Set Update Lock"** field in the form.
+6. Set the value to either **"Yes"** or **"No"** based on your requirements.
+
+<Warning>
+**Important things to consider**:
+
+- If Update Lock is set to **"Yes"** for a **".com"** domain, the other five extensions should also be set to **"Yes"** by default.
+</Warning>

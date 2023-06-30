@@ -1,0 +1,107 @@
+---
+title: "Post Webhook"
+sidebarTitle: "Post Webhook"
+---
+
+The **"Post Webhook"** feature allows resellers to receive notifications when a domain requested through the **"Register Domains"** or **"Transfer Domain"** commands is successfully registered or transferred. This feature enables resellers to be informed by posting a webhook.
+
+## Saving Requested Domains
+
+Whenever the commands **"Register Domains"** or **"Transfer Domain"** are executed and a status code of 201 or 202 is received, the requested domains should be saved in the **"Monitoring Domains For Webhook"**.
+
+## Setting up the Post Webhooks Task
+
+Create a new **"Post Webhooks"** task that will run at regular intervals, preferably every 5 minutes.
+
+### Task Execution:
+
+When the **"Post Webhooks"** task runs, it performs the following steps:
+
+1. Check for **"Updated Domains"**.
+   1. Compare the **"Monitoring Domains For Webhook"** with the previous run of the task.
+   2. Identify any domains that have been updated to the status **"Registered"** since the last task execution.
+2. Verify **"Reseller Webhook Activation"**:
+   1. For each newly registered domain, check if it belongs to a reseller with an activated webhook.
+   2. Only domains associated with resellers who have enabled webhooks should proceed to the next step.
+3. Queue **"Webhook Posting"**:
+   1. Implement a queue system for posting webhooks to avoid the simultaneous posting of multiple domains.
+   2. Consider posting webhooks sequentially for each reseller. 
+   3. Post one webhook, then proceed to the next."
+   4. **Webhook Posting"**:
+   5. For each reseller with an activated webhook, post the webhook for the corresponding domain.
+   6. Ensure that the webhook posting mechanism is designed to handle potential errors and provide appropriate feedback or logging.
+
+## Webhook Setup
+
+The **"Webhook Setup"** page allows resellers to configure the webhook and decide whether to receive notifications when a domain is updated to **"Registered"**.
+
+### Access the Webhook Setup
+
+ Follow the steps below to set up the webhook:
+
+1. Access the **"API Swagger"** and navigate to the **"Webhook"** tab.
+2. Click on the **"Webhook Setup"** page.
+
+<Note>
+- By setting up **"Post webhook"**, notifications for successfully registered or transferred domains requested will be received through the **"Register Domains"** or **"Transfer Domain"** commands.
+- The **"Post webhook"**,will only work for domains that are not immediately activated, indicated by a response code of 201 or 202.
+- If a domain is successfully registered in real-time, the **"Post webhook"**, for that domain will not be triggered. In such cases, you can obtain domain information using the same API.
+- Setting up this **"Post webhook"**, is optional. The status of the domain can also be checked using the **"Status"** API command
+</Note>
+
+3. Click the **"Activate Webhook"** button.
+4. A box will appear to enter the **"Webhook URL"**. Enter the URL in the following format:
+
+| URL Format                                                                           | Description                                                                                |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `www.reseller-website.com/set-domain-registration/domain=[domain]&date=[yyyy-mm-dd]` | The URL for setting domain registration, where [domain] and [yyyy-mm-dd] are placeholders. |
+| Replace [domain] with the domain name                                                | Replace the [domain] placeholder in the URL with the actual domain name.                   |
+| Replace [yyyy-mm-dd] with the expiration date                                        | Replace the [yyyy-mm-dd] placeholder in the URL with the actual expiration date.           |
+
+<Warning>The URL must include both the domain and date fields, and the format must match the example provided.</Warning>
+
+5. Click **"Save"** to activate the **"Post webhook"**.
+
+## Webhook Logs
+
+The **"Webhook Logs"** page allows resellers and admin users to view the logs of the webhooks that have been triggered. The logs provide information such as the date, domain, and command.
+
+### Access the Webhook Logs
+
+ Follow the instructions below to access the Webhook Logs:
+
+1. Access the **"API Swagger"** and navigate to the **"Webhook"** tab.
+2. Click on the **"Webhook Logs"** page.
+3. For example, the page will display a table with the following columns:
+
+| Date       | Domain         | Command          |
+| ---------- | -------------- | ---------------- |
+| 2023-05-15 | example.com    | Register Domains |
+| 2023-05-18 | mydomain.org   | Transfer Domain  |
+| 2023-05-22 | testdomain.net | Register Domains |
+| 2023-05-25 | yourdomain.com | Transfer Domain  |
+| 2023-05-30 | newdomain.co   | Register Domains |
+
+<Note>
+- As an admin user, you will notice a Reseller drop-down menu located at the top right corner of the page.
+- By default, the drop-down menu will display the option **"All Resellers"**, allowing you to view data and perform actions for all resellers in the system.
+- However, for specific resellers, the drop-down menu will not be visible, as the system will automatically filter the content and actions based on your assigned reseller privileges.
+</Note>
+
+## Connect Webhook to Zapier
+
+The **"Post webhook"** for domain activation notification can be connected to the Zapier.com platform. Zapier.com provides a platform for creating various types of connections and integrations. 
+
+### Access your Zapier account.
+
+Follow the steps below to connect the **"Post webhook"** to Zapier:
+
+1. Go to the Zapier.com platform and select the **"Post webhook"** integration.
+2. Obtain the **"Post webhook"** URL from the Zapier webhook setup page.
+3. Set up a Zap that posts data from the **"Post webhook"** to a Google Sheet.
+
+<Note>You will need to create a Google Sheet with two columns, **"Domain"** and **"Expiration Date"**, for testing purposes.</Note>
+
+4. Test the Zap to ensure that data from the **"Post webhook"** is correctly sent to the Google Sheet.
+
+<Check>Congratulations! You have successfully set up and configured the "Post Webhook" feature. Now you will receive notifications when a domain is registered or transferred.</Check>
