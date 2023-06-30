@@ -1,66 +1,205 @@
 {
-  "name": "Starter Kit",
+  "name": "Superreseller",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "light": "/logo/superresell.svg",
+    "dark": "/logo/superresell.svg"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/logo/superresell.svg",
   "colors": {
-    "primary": "#12A7D3",
-    "light": "#81D7F7",
-    "dark": "#004E7A"
-  },
-  "topbarLinks": [
-    {
-      "name": "Documentation",
-      "url": "https://mintlify.com/docs"
+    "primary": "#00A0F0",
+    "light": "#00A0F0",
+    "dark": "#676A6D",
+    "background": {
+      "light": "#D1FFFF",
+      "dark": "#121212"
+    },
+    "anchors": {
+      "from": "#7C34FF",
+      "to": "#FE9195"
     }
-  ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
   },
-  "tabs": [
+  "anchors": [
     {
-      "name": "Integration",
-      "pages": "integrationapi"
+      "name": "Facebook",
+      "icon": "facebook",
+      "url": "https://www.facebook.com/registerdom/"
     },
     {
+      "name": "Twitter",
+      "icon": "twitter",
+      "url": "https://twitter.com/RegisterDom"
+    },
+    {
+      "name": "Contact Us",
+      "icon": "phone-rotary",
+      "url": "https://www.marcaria.com/ws/en/contact-us"
+    }
+  ],
+  "tabs": [
+    {
       "name": "API Reference",
-      "pages": "api-reference"
+      "url": "api-reference"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "group": "Welcome",
+      "pages": ["Welcome/Homepage", "Welcome/Overview", "Welcome/Key-Elements"]
     },
     {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
+      "group": "Commands",
+      "pages": ["command/overview",
+        {
+          "group": "Domain Commands",
+          "pages": [
+            "command/domain/registerdomain",
+            "command/domain/updatedns",
+            "command/domain/transferin",
+            "command/domain/setexp",
+            "command/domain/lock",
+            "command/domain/updatelock",
+            "command/domain/renewallock",
+            "command/domain/deletelock",
+            "command/domain/clienthold",
+            "command/domain/addfields",
+            "command/domain/adddocs",
+            "command/domain/statusdomain"
+          ]
+        },
+        {
+          "group": "Contact Commands",
+          "pages": [
+            "command/contact/create",
+            "command/contact/modify",
+            "command/contact/check",
+            "command/contact/status",
+            "command/contact/update",
+            "command/contact/delete",
+            "contacts/changeof"
+          ]
+        },
+        {
+          "group": "Host Commands",
+          "pages": [
+            "command/host/create",
+            "command/host/modify",
+            "command/host/check",
+            "command/host/status",
+            "command/host/update",
+            "command/host/delete"
+          ]
+        }
+      ]
     },
     {
-      "group": "Integration",
-      "pages": ["integrationapi/integrationapi"]
+      "group": "Domains",
+      "pages": ["domain/overview",
+        {
+          "group": "Domain Renewal",
+          "pages": [ "domainrenewal/renewal",
+            {
+              "group": "Renewal Commands",
+              "pages": [
+                "domainrenewal/overview",
+                "domainportfolio/modify",
+                "domainportfolio/renew",
+                "domainrenewal/setautorenew"
+              ]
+            },
+            "domainrenewal/registrationpolicy",
+            "domainrenewal/newdomainextensions",
+            "domainrenewal/emailprocessing",
+            "domainrenewal/scheduledtasks"
+          ]
+        },
+        "domain/status","domain/blocked", "domain/pending", "domain/trustee", "domain/handle"
+      ]
     },
     {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
+      "group": "Contacts",
+      "pages": ["contacts/contacts", "contacts/management"]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Accounting",
+      "pages": [ "accounting/overview", "accounting/deposit", "accounting/invoices", "accounting/statement"]
+    },
+    {
+      "group": "API",
+      "pages": ["apilimit/overview", "apilimit/management","apilimit/requestlogs", "domainrenewal/returncode"]
+    },
+    {
+      "group": "Webhook",
+      "pages": ["webhook/overview", "webhook/successfull", "webhook/sent", "webhook/cancelled", "webhook/reversed", "webhook/post"]
+    },
+    {
+      "group": "Dashboard",
+      "pages": ["dashboard/overview", 
+        {
+          "group": "Account",
+          "pages": [ "dashboard/accountoverview","dashboard/account", "dashboard/useraccount", "dashboard/balance"]
+        },
+        "hosts/request", "dashboard/multiuse", "dashboard/pass", "dashboard/portfolio", "dashboard/validations", "dashboard/commandstatus", "dashboard/private"]
+    },
+    {
+      "group": "Superreseller Endpoints",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        {
+          "group": "Domain Endpoints",
+          "pages": [ "api-reference/endpoint/checkdomain",
+          "api-reference/endpoint/checkdomainstatus",
+          "api-reference/endpoint/registerdomain",
+          "api-reference/endpoint/registerdomainwith",
+          "api-reference/endpoint/transferin",
+          "api-reference/endpoint/renewalsdomain",
+          {
+            "group": "Domain: ModifyDomain Endpoints",
+            "pages": [ "api-reference/endpoint/updatedns",
+            "api-reference/endpoint/updatecontactname",
+            "api-reference/endpoint/changetransferlock",
+            "api-reference/endpoint/changeupdatelock",
+            "api-reference/endpoint/changedeletelock",
+            "api-reference/endpoint/changerenewallock",
+            "api-reference/endpoint/changeclienthold",
+            "api-reference/endpoint/privateregis",
+            "api-reference/endpoint/changeautorenew",
+            "api-reference/endpoint/changeauth",
+            "api-reference/endpoint/deletecontactdomain"]
+          },
+          {
+            "group": "Domain: Hosts Endpoints",
+            "pages": [ "api-reference/endpoint/checkhostavailability",
+            "api-reference/endpoint/checkhoststatus",
+            "api-reference/endpoint/updatehost",
+            "api-reference/endpoint/createnewhost",
+            "api-reference/endpoint/deletehost"]
+          }]
+        },
+        {
+          "group": "Contact Endpoints",
+          "pages": [ "api-reference/endpoint/checkcontact",
+          "api-reference/endpoint/checkcontactstatus",
+          "api-reference/endpoint/createcontact",
+          "api-reference/endpoint/updatecontact",
+          "api-reference/endpoint/deletecontact"]
+        },
+        {
+          "group": "Pending Requests Endpoints",
+          "pages": [ "api-reference/endpoint/pendingdomain",
+          "api-reference/endpoint/addpendingadditionalinformation",
+          "api-reference/endpoint/addpendingadditionaldocumentation"]
+
+        },
+        {
+          "group": "Requests Endpoints",
+          "pages": [ "api-reference/endpoint/retrieverequestchangelog",
+          "api-reference/endpoint/retrieverequeststatus"]
+        }
       ]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "facebook": "https://www.facebook.com/registerdom/",
+    "twitter": "https://twitter.com/RegisterDom"
   },
-  "backgroundImage": "/background.png"
+  "backgroundImage": "/images/lightbackground.png"
 }
